@@ -18,7 +18,7 @@ class _CalendarWidgetState extends State<CalendarWidget> {
       firstDayOfWeek: 6,
       //initialDisplayDate: DateTime(2021, 03, 01, 08, 30),
       //initialSelectedDate: DateTime(2021, 03, 01, 08, 30),
-      dataSource: MeetingDataSource(getAppointments()),
+      dataSource: PackageDataSource(getAppointments()),
     );
   }
 }
@@ -33,7 +33,7 @@ List<Appointment> getAppointments() {
   packages.add(Appointment(
       startTime: startTime,
       endTime: endTime,
-      subject: 'Board Meeting',
+      subject: 'Package',
       color: Colors.blue[700] ?? Colors.blue,
       recurrenceRule: 'FREQ=DAILY;COUNT=10',
       isAllDay: false));
@@ -41,8 +41,8 @@ List<Appointment> getAppointments() {
   return packages;
 }
 
-class MeetingDataSource extends CalendarDataSource {
-  MeetingDataSource(List<Appointment> source) {
+class PackageDataSource extends CalendarDataSource {
+  PackageDataSource(List<Appointment> source) {
     appointments = source;
   }
 }

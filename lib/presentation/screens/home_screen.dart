@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hermes/widgets/calendar/calendar_widget.dart';
+import 'package:hermes/presentation/widgets/calendar/calendar_widget.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({
