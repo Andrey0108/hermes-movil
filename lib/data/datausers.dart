@@ -1,4 +1,4 @@
-const List<Map<String, dynamic>> listCard = [
+const List<Map<String, dynamic>> users = [
   {
     "name": "Juan Quintero",
     "image": "assets/images/juan.jpg",

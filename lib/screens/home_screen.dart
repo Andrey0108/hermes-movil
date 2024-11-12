@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hermes/widgets/listview_widget.dart';
+import 'package:hermes/widgets/calendar/calendar_widget.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({
@@ -12,7 +12,7 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Center(
           child: Text(
-            'Home',
+            'Paquetes',
             style: TextStyle(
               color: Colors.black45,
             ),
@@ -20,7 +20,7 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: const ListviewWidget(),
+      body: const CalendarWidget(),
       backgroundColor: Colors.grey[100],
     );
   }
