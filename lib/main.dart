@@ -1,27 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:hermes/screens/login_screen.dart';
-import 'package:hermes/screens/home_screen.dart';
-import 'package:hermes/screens/nofound_screen.dart';
+import 'screens/index.dart';
 
-void main() => runApp(const MyApp());
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
+
+  final _routes = {
+    "/": (context) => const LoginScreen(),
+    "/home": (context) => const HomeScreen(),
+  };
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Hermes',
-      initialRoute: "/"
-      routes: {
-        "/": (context) => LoginScreen(),
-        "/home": (context) => HomeScreen(),
-      },
-      onGenerateRoute: (settings){
-      return MaterialPageRoute(
-        builder: (context) => NofoundScreen()
-      )
-      }
-    );
+        title: 'Hermes',
+        initialRoute: "/",
+        routes: _routes,
+        onGenerateRoute: (settings) {
+          return MaterialPageRoute(
+            builder: (context) => const NofoundScreen(),
+          );
+        });
   }
 }

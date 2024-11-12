@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatelessWidget {
+class NofoundScreen extends StatelessWidget {
   const NofoundScreen({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Center(
-        Column(
-            children:[
-                Text("La pagina a la que intentas acceder no existe")
-            ]
-        )
-      ),
+          child: Column(children: [
+        Text("La pagina a la que intentas acceder no existe")
+      ])),
     );
   }
 }

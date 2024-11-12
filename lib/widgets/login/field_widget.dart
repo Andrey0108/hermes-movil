@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
 
-class ListviewWidget extends StatelessWidget {
-  const ListviewWidget({super.key, required this.hintText, required this.oscureText});
+class FieldWidget extends StatelessWidget {
+  const FieldWidget(
+      {super.key, required this.hintText, required this.oscureText});
 
   final String hintText;
-  final Bool oscureText;
+  final bool oscureText;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-        child: TextField(
-            oscureText: false
-            hintText: hintText
-        )
-    )
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      child: TextField(
+        obscureText: oscureText,
+        decoration: InputDecoration(
+          hintText: hintText,
+        ),
+      ),
+    );
   }
 }

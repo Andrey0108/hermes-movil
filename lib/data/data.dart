@@ -4,7 +4,8 @@ const List<Map<String, dynamic>> listCard = [
     "image": "assets/images/juan.jpg",
     "description": "Desarrollador Backend",
     "phone": "301 234 5678",
-    "email": "juan_fquintero@soy.sena.edu.co",
+    "email": "jf@gmail.com",
+    "password": "123",
     "status": true,
   },
   {
