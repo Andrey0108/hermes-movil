@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hermes/presentation/widgets/calendar/calendar_widget.dart';
+import 'package:hermes/presentation/widgets/menu/menu_widget.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({
@@ -21,6 +22,7 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
       body: const CalendarWidget(),
+      bottomNavigationBar: const MenuWidget(),
       backgroundColor: Colors.grey[100],
     );
   }
