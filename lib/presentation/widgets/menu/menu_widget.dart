@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:hermes/presentation/screens/home_screen.dart';
 
 class MenuWidget extends StatefulWidget {
-  const MenuWidget({super.key});
+  const MenuWidget({super.key, required this.currentIndex});
+
+  final int currentIndex;
 
   @override
   State<MenuWidget> createState() => _MenuWidgetState();
 }
 
 class _MenuWidgetState extends State<MenuWidget> {
-  List<Widget> items = [const HomeScreen()];
-  int optionMenu = 0;
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       onTap: (value) => {
-        setState(() {
-          optionMenu = value;
-        })
+        if (value == 0)
+          {Navigator.pushNamed(context, "/home")}
+        else if (value == 1)
+          {Navigator.pushNamed(context, "/profile")}
       },
-      currentIndex: 0,
+      currentIndex: widget.currentIndex,
       items: const [
         BottomNavigationBarItem(
           icon: Icon(Icons.calendar_month),

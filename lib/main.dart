@@ -9,6 +9,7 @@ class MyApp extends StatelessWidget {
   final _routes = {
     "/": (context) => const LoginScreen(),
     "/home": (context) => const HomeScreen(),
+    "/profile": (context) => const ProfileScreen(),
   };
 
   @override
