@@ -19,7 +19,7 @@ class _MenuWidgetState extends State<MenuWidget> {
         else if (value == 1)
           {Navigator.pushNamed(context, "/profile")}
       },
-      currentIndex: 0,
+      currentIndex: widget.currentIndex,
       items: const [
         BottomNavigationBarItem(
           icon: Icon(Icons.calendar_month),

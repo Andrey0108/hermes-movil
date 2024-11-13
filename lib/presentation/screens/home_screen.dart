@@ -23,7 +23,7 @@ class HomeScreen extends StatelessWidget {
       ),
       body: const CalendarWidget(),
       bottomNavigationBar: const MenuWidget(
-        currentIndex: 1,
+        currentIndex: 0,
       ),
       backgroundColor: Colors.grey[100],
     );
