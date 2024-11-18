@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hermes/presentation/widgets/image_widget.dart';
 import 'package:hermes/presentation/widgets/login/field_widget.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -11,18 +12,7 @@ class LoginScreen extends StatelessWidget {
     return Scaffold(
         body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
       title(),
-      Container(
-        width: 220.0,
-        height: 220.0,
-        clipBehavior: Clip.antiAlias,
-        decoration: const BoxDecoration(
-          shape: BoxShape.circle,
-        ),
-        child: Image.asset(
-          '../../assets/images/hermes.png', // Asegúrate de tener esta imagen en tu proyecto
-          fit: BoxFit.cover,
-        ),
-      ),
+      const ImageWidget(image: "hermes.png"),
       loginForm(),
       ElevatedButton(
         style: ElevatedButton.styleFrom(
@@ -53,19 +43,8 @@ Widget title() {
       "Iniciar sesión",
       style: TextStyle(
         color: Colors.black,
-        fontSize: 28,
-        fontWeight: FontWeight.bold,
+        fontSize: 25,
       ),
-    ),
-  );
-}
-
-Widget logo() {
-  return const Center(
-    child: Image(
-      image: AssetImage('assets/logo.png'),
-      width: 100,
-      height: 100,
     ),
   );
 }
