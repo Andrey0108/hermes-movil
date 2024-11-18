@@ -11,12 +11,31 @@ class LoginScreen extends StatelessWidget {
     return Scaffold(
         body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
       title(),
+      Container(
+        width: 220.0,
+        height: 220.0,
+        clipBehavior: Clip.antiAlias,
+        decoration: const BoxDecoration(
+          shape: BoxShape.circle,
+        ),
+        child: Image.asset(
+          '../../assets/images/hermes.png', // Asegúrate de tener esta imagen en tu proyecto
+          fit: BoxFit.cover,
+        ),
+      ),
       loginForm(),
       ElevatedButton(
         style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.blue[700],
-            foregroundColor: Colors.white,
-            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10)),
+          backgroundColor: Colors.blue[700],
+          foregroundColor: Colors.white,
+          padding: const EdgeInsets.symmetric(
+            horizontal: 30,
+            vertical: 10,
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8.0),
+          ),
+        ),
         onPressed: () {
           // redirigir a la pantalla de home
           Navigator.pushReplacementNamed(context, "/home");
