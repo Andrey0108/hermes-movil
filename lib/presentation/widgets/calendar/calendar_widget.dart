@@ -1,5 +1,4 @@
-// ignore_for_file: library_private_types_in_public_api
-
+// ignore_for_file: library_private_types_in_public_api, avoid_print
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
@@ -13,12 +12,16 @@ class CalendarWidget extends StatefulWidget {
 class _CalendarWidgetState extends State<CalendarWidget> {
   @override
   Widget build(BuildContext context) {
-    return SfCalendar(
-      view: CalendarView.week,
-      firstDayOfWeek: 6,
-      //initialDisplayDate: DateTime(2021, 03, 01, 08, 30),
-      //initialSelectedDate: DateTime(2021, 03, 01, 08, 30),
-      dataSource: PackageDataSource(getAppointments()),
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+      child: SfCalendar(
+        view: CalendarView.month,
+        firstDayOfWeek: 7,
+        //initialDisplayDate: DateTime(2021, 03, 01, 08, 30),
+        //initialSelectedDate: DateTime(2021, 03, 01, 08, 30),
+        dataSource: PackageDataSource(getAppointments()),
+        onTap: (calendarTapDetails) => print(calendarTapDetails),
+      ),
     );
   }
 }
@@ -27,16 +30,19 @@ List<Appointment> getAppointments() {
   List<Appointment> packages = <Appointment>[];
   final DateTime today = DateTime.now();
   final DateTime startTime =
-      DateTime(today.year, today.month, today.day, 9, 0, 0);
+      DateTime(today.year, today.month, today.day, 6, 0, 0);
   final DateTime endTime = startTime.add(const Duration(hours: 2));
 
-  packages.add(Appointment(
+  packages.add(
+    Appointment(
       startTime: startTime,
       endTime: endTime,
-      subject: 'Package',
-      color: Colors.blue[700] ?? Colors.blue,
+      subject: 'Cartagena',
+      color: Colors.blue,
       recurrenceRule: 'FREQ=DAILY;COUNT=10',
-      isAllDay: false));
+      isAllDay: false,
+    ),
+  );
 
   return packages;
 }

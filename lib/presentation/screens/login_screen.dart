@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hermes/presentation/widgets/image_widget.dart';
 import 'package:hermes/presentation/widgets/login/field_widget.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -9,79 +10,51 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-      title(),
-      Container(
-        width: 220.0,
-        height: 220.0,
-        clipBehavior: Clip.antiAlias,
-        decoration: const BoxDecoration(
-          shape: BoxShape.circle,
-        ),
-        child: Image.asset(
-          '../../assets/images/hermes.png', // Asegúrate de tener esta imagen en tu proyecto
-          fit: BoxFit.cover,
-        ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Text(
+            "Iniciar sesión",
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 25,
+            ),
+          ),
+          const ImageWidget(image: "hermes.png"),
+          const Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              FieldWidget(
+                hintText: "Correo",
+                oscureText: false,
+              ),
+              FieldWidget(
+                hintText: "Contraseña",
+                oscureText: true,
+              ),
+            ],
+          ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.blue[700],
+              foregroundColor: Colors.white,
+              padding: const EdgeInsets.symmetric(
+                horizontal: 30,
+                vertical: 10,
+              ),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8.0),
+              ),
+            ),
+            onPressed: () {
+              // redirigir a la pantalla de home
+              Navigator.pushReplacementNamed(context, "/home");
+            },
+            child: const Text("Ingresar"),
+          )
+          // Add the login form here
+        ],
       ),
-      loginForm(),
-      ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.blue[700],
-          foregroundColor: Colors.white,
-          padding: const EdgeInsets.symmetric(
-            horizontal: 30,
-            vertical: 10,
-          ),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8.0),
-          ),
-        ),
-        onPressed: () {
-          // redirigir a la pantalla de home
-          Navigator.pushReplacementNamed(context, "/home");
-        },
-        child: const Text("Ingresar"),
-      )
-      // Add the login form here
-    ]));
+    );
   }
-}
-
-Widget title() {
-  return const Center(
-    child: Text(
-      "Iniciar sesión",
-      style: TextStyle(
-        color: Colors.black,
-        fontSize: 28,
-        fontWeight: FontWeight.bold,
-      ),
-    ),
-  );
-}
-
-Widget logo() {
-  return const Center(
-    child: Image(
-      image: AssetImage('assets/logo.png'),
-      width: 100,
-      height: 100,
-    ),
-  );
-}
-
-Widget loginForm() {
-  return const Column(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-      FieldWidget(
-        hintText: "Correo",
-        oscureText: false,
-      ),
-      FieldWidget(
-        hintText: "Contraseña",
-        oscureText: true,
-      ),
-    ],
-  );
 }
