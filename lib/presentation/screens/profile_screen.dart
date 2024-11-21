@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hermes/presentation/widgets/appbar_widget.dart';
 import 'package:hermes/presentation/widgets/menu/menu_widget.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -7,16 +8,8 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Center(
-          child: Text(
-            'Perfil',
-            style: TextStyle(
-              color: Colors.black45,
-            ),
-            textAlign: TextAlign.center,
-          ),
-        ),
+      appBar: const AppBarWidget(
+        title: "Perfil",
       ),
       body: Center(
         child: Column(
