@@ -7,17 +7,18 @@ class LoginScreen extends StatelessWidget {
     super.key,
   });
 
+  final double fontSize = 25;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text(
+          Text(
             "Iniciar sesión",
             style: TextStyle(
-              color: Colors.black,
-              fontSize: 25,
+              fontSize: fontSize,
             ),
           ),
           const ImageWidget(image: "hermes.png"),

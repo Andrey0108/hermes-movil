@@ -10,15 +10,14 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const AppBarWidget(
-        title: "Paquetes",
+    return const Scaffold(
+      appBar: AppBarWidget(
+        title: "Calendario",
       ),
-      body: const CalendarWidget(),
-      bottomNavigationBar: const MenuWidget(
+      body: CalendarWidget(),
+      bottomNavigationBar: MenuWidget(
         currentIndex: 0,
       ),
-      backgroundColor: Colors.grey[100],
     );
   }
 }
