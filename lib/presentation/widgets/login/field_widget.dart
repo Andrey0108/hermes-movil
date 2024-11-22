@@ -12,25 +12,25 @@ class FieldWidget extends StatefulWidget {
 }
 
 class _FieldWidgetState extends State<FieldWidget> {
+  double horizontalValue = 20;
+  double verticalValue = 10;
+  double borderRadiusValue = 8.0;
+
   bool viewPass = false;
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 20,
-        vertical: 10,
+      padding: EdgeInsets.symmetric(
+        horizontal: horizontalValue,
+        vertical: verticalValue,
       ),
       child: TextFormField(
           obscureText: widget.oscureText,
           decoration: InputDecoration(
-            focusColor: Colors.blue,
-            fillColor: Colors.blue,
             labelText: widget.hintText,
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8.0),
-              borderSide: const BorderSide(
-                color: Colors.blue,
-              ),
+              borderRadius: BorderRadius.circular(borderRadiusValue),
             ),
             suffixIcon: widget.oscureText
                 ? IconButton(

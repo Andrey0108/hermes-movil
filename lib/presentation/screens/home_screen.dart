@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hermes/presentation/widgets/appbar_widget.dart';
 import 'package:hermes/presentation/widgets/calendar/calendar_widget.dart';
 import 'package:hermes/presentation/widgets/menu/menu_widget.dart';
 
@@ -9,23 +10,14 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Center(
-          child: Text(
-            'Paquetes',
-            style: TextStyle(
-              color: Colors.black45,
-            ),
-            textAlign: TextAlign.center,
-          ),
-        ),
+    return const Scaffold(
+      appBar: AppBarWidget(
+        title: "Calendario",
       ),
-      body: const CalendarWidget(),
-      bottomNavigationBar: const MenuWidget(
+      body: CalendarWidget(),
+      bottomNavigationBar: MenuWidget(
         currentIndex: 0,
       ),
-      backgroundColor: Colors.grey[100],
     );
   }
 }

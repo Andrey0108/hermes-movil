@@ -20,7 +20,9 @@ class _CalendarWidgetState extends State<CalendarWidget> {
         //initialDisplayDate: DateTime(2021, 03, 01, 08, 30),
         //initialSelectedDate: DateTime(2021, 03, 01, 08, 30),
         dataSource: PackageDataSource(getAppointments()),
-        onTap: (calendarTapDetails) => print(calendarTapDetails),
+        onTap: (calendarTapDetails) => {
+          Navigator.pushNamed(context, "/package"),
+        },
       ),
     );
   }

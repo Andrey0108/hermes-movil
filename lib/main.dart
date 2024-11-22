@@ -9,17 +9,20 @@ class MyApp extends StatelessWidget {
   final _routes = {
     "/": (context) => const LoginScreen(),
     "/home": (context) => const HomeScreen(),
+    "/package": (context) => const PackageScreen(),
     "/profile": (context) => const ProfileScreen(),
   };
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Hermes',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(
             seedColor: Colors.blue,
           ),
+          fontFamily: "TTMasters",
         ),
         initialRoute: "/",
         routes: _routes,
