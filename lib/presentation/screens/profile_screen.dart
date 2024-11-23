@@ -3,17 +3,13 @@ import 'package:hermes/presentation/widgets/appbar_widget.dart';
 import 'package:hermes/presentation/widgets/menu/menu_widget.dart';
 import 'package:hermes/presentation/widgets/profile/data_widget.dart';
 
+import '../values.dart';
+
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    double horizontalValue = 20;
-    double verticalValue = 10;
-    double borderRadiusValue = 8.0;
-
-    double iconSize = 180;
-
     return Scaffold(
       appBar: const AppBarWidget(
         title: "Perfil",
@@ -37,20 +33,22 @@ class ProfileScreen extends StatelessWidget {
               color: Colors.white,
             ),
           ),
-          const Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              DataWidget(hintText: "Nombres", dataText: "Alan Andrey"),
-              DataWidget(hintText: "Apellidos", dataText: "Sanchez Caro"),
-              DataWidget(
-                  hintText: "Correo", dataText: "alansanchez123@gmail.com"),
-              DataWidget(hintText: "Teléfono", dataText: "3011111111"),
-              DataWidget(hintText: "Dirección", dataText: "Cl 9 # 9-9"),
-            ],
+          const Center(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                DataWidget(hintText: "Nombres", dataText: "Alan Andrey"),
+                DataWidget(hintText: "Apellidos", dataText: "Sanchez Caro"),
+                DataWidget(
+                    hintText: "Correo", dataText: "alansanchez123@gmail.com"),
+                DataWidget(hintText: "Teléfono", dataText: "3011111111"),
+                DataWidget(hintText: "Dirección", dataText: "Cl 9 # 9-9"),
+              ],
+            ),
           ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.red[700],
+              backgroundColor: Colors.red[colorValue],
               foregroundColor: Colors.white,
               padding: EdgeInsets.symmetric(
                 horizontal: horizontalValue,

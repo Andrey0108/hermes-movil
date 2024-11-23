@@ -15,7 +15,7 @@ class _CalendarWidgetState extends State<CalendarWidget> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
       child: SfCalendar(
-        view: CalendarView.month,
+        view: CalendarView.week,
         firstDayOfWeek: 7,
         //initialDisplayDate: DateTime(2021, 03, 01, 08, 30),
         //initialSelectedDate: DateTime(2021, 03, 01, 08, 30),
