@@ -12,7 +12,7 @@ class ProfileScreen extends StatelessWidget {
     double verticalValue = 10;
     double borderRadiusValue = 8.0;
 
-    double iconSize = 180;
+    double iconSize = 100;
 
     return Scaffold(
       appBar: const AppBarWidget(
@@ -37,16 +37,18 @@ class ProfileScreen extends StatelessWidget {
               color: Colors.white,
             ),
           ),
-          const Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              DataWidget(hintText: "Nombres", dataText: "Alan Andrey"),
-              DataWidget(hintText: "Apellidos", dataText: "Sanchez Caro"),
-              DataWidget(
-                  hintText: "Correo", dataText: "alansanchez123@gmail.com"),
-              DataWidget(hintText: "Teléfono", dataText: "3011111111"),
-              DataWidget(hintText: "Dirección", dataText: "Cl 9 # 9-9"),
-            ],
+          const Center(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                DataWidget(hintText: "Nombres", dataText: "Alan Andrey"),
+                DataWidget(hintText: "Apellidos", dataText: "Sanchez Caro"),
+                DataWidget(
+                    hintText: "Correo", dataText: "alansanchez123@gmail.com"),
+                DataWidget(hintText: "Teléfono", dataText: "3011111111"),
+                DataWidget(hintText: "Dirección", dataText: "Cl 9 # 9-9"),
+              ],
+            ),
           ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
