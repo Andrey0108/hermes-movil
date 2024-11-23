@@ -3,17 +3,13 @@ import 'package:hermes/presentation/widgets/appbar_widget.dart';
 import 'package:hermes/presentation/widgets/menu/menu_widget.dart';
 import 'package:hermes/presentation/widgets/profile/data_widget.dart';
 
+import '../values.dart';
+
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    double horizontalValue = 20;
-    double verticalValue = 10;
-    double borderRadiusValue = 8.0;
-
-    double iconSize = 100;
-
     return Scaffold(
       appBar: const AppBarWidget(
         title: "Perfil",
@@ -52,7 +48,7 @@ class ProfileScreen extends StatelessWidget {
           ),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.red[700],
+              backgroundColor: Colors.red[colorValue],
               foregroundColor: Colors.white,
               padding: EdgeInsets.symmetric(
                 horizontal: horizontalValue,

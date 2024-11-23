@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hermes/presentation/widgets/appbar_widget.dart';
 import 'package:hermes/presentation/widgets/menu/menu_widget.dart';
 
+import '../values.dart';
+
 class PackageScreen extends StatelessWidget {
   const PackageScreen({super.key});
 
@@ -13,7 +15,10 @@ class PackageScreen extends StatelessWidget {
       ),
       body: Container(
         alignment: Alignment.center,
-        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+        padding: EdgeInsets.symmetric(
+          horizontal: horizontalValue,
+          vertical: verticalValue,
+        ),
         child: const Text('Package Screen'),
       ),
       bottomNavigationBar: const MenuWidget(

@@ -9,9 +9,12 @@ class NofoundScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: Center(
-          child: Column(children: [
-        Text("La pagina a la que intentas acceder no existe")
-      ])),
+        child: Column(
+          children: [
+            Text("La pagina a la que intentas acceder no existe"),
+          ],
+        ),
+      ),
     );
   }
 }
