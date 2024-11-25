@@ -17,7 +17,6 @@ class DataWidget extends StatelessWidget {
     double labelTextSize = 18;
 
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
           "$hintText: ",
