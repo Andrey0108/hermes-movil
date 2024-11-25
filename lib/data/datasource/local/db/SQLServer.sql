@@ -1,39 +1,35 @@
---CREATE DATABASE hermes;
-
---USE hermes;
+--CREATE DATABASE hermes COLLATE SQL_Latin1_General_CP1_CI_AS;
+USE hermes;
 
 DROP TABLE IF EXISTS permiso;
 CREATE TABLE permiso(
     idPermiso INT IDENTITY(1,1) NOT NULL,
-    nombrePermiso VARCHAR(60) NOT NULL,
+    nombrePermiso VARCHAR(60) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
     estadoPermiso BIT NOT NULL DEFAULT 1,
 
     CONSTRAINT PK_idPermiso PRIMARY KEY (idPermiso),
-    CONSTRAINT uc_nombrePermiso UNIQUE (nombrePermiso),
-    CONSTRAINT CHK_nombrePermiso CHECK (nombrePermiso LIKE '[A-Z][a-zñ]{3,}[^0-9][^a-z][^A-Z][_]$')
+    CONSTRAINT uc_nombrePermiso UNIQUE (nombrePermiso)
 );
 
 DROP TABLE IF EXISTS privilegio;
 CREATE TABLE privilegio(
     idPrivilegio INT IDENTITY(1,1) NOT NULL,
-    nombrePrivilegio VARCHAR(60) NOT NULL,
+    nombrePrivilegio VARCHAR(60) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
     idPermiso INT NOT NULL,
 
     CONSTRAINT PK_idPrivilegio PRIMARY KEY (idPrivilegio),
     CONSTRAINT FK_idPermiso FOREIGN KEY (idPermiso) REFERENCES permiso(idPermiso) ON DELETE CASCADE,
-    CONSTRAINT uc_nombrePrivilegio UNIQUE (nombrePrivilegio),
-    CONSTRAINT CHK_nombrePrivilegio CHECK (nombrePrivilegio LIKE '[A-Z][a-zñ]{3,}[^0-9][^a-z][^A-Z][_]$')
+    CONSTRAINT uc_nombrePrivilegio UNIQUE (nombrePrivilegio)
 );
 
 DROP TABLE IF EXISTS rol  ;
 CREATE TABLE rol(
     idRol INT IDENTITY(1,1) NOT NULL,
-    nombreRol VARCHAR(60) NOT NULL,
+    nombreRol VARCHAR(60) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
     estadoRol BIT NOT NULL DEFAULT 1,
 	
     CONSTRAINT PK_idRol PRIMARY KEY (idRol),
-    CONSTRAINT UC_nombreRol UNIQUE (nombreRol),
-    CONSTRAINT CHK_nombreRol CHECK (nombreRol LIKE '^[A-Z][a-zñ]{3,}[^\d\W_]*$')
+    CONSTRAINT UC_nombreRol UNIQUE (nombreRol)
 );
 
 DROP TABLE IF EXISTS rolPrivilegio  ;
@@ -51,31 +47,28 @@ DROP TABLE IF EXISTS usuario  ;
 CREATE TABLE usuario( 
     idUsuario INT IDENTITY(1,1) NOT NULL,
     idRol INT NOT NULL,
-    tipoDocumento VARCHAR(5) NOT NULL,
-    identificacion VARCHAR(60) NOT NULL,
-    nombre VARCHAR(255) NOT NULL,
-    apellido VARCHAR(255) NOT NULL,
-    correo VARCHAR(255) NOT NULL,
+    tipoDocumento VARCHAR(5) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+    identificacion VARCHAR(60) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+    nombre VARCHAR(255) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+    apellido VARCHAR(255) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+    correo VARCHAR(255) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
     contrasenha VARCHAR(255) NOT NULL,
     estadoUsuario BIT NOT NULL DEFAULT 1,
 
     CONSTRAINT PK_idUsuario PRIMARY KEY (idUsuario),
     CONSTRAINT FK_idRolUsuario FOREIGN KEY (idRol) REFERENCES rol(idRol) ON DELETE CASCADE,
-    CONSTRAINT CHK_tipoDocumento CHECK (tipoDocumento IN ('CC', 'CE', 'PA', 'SC', 'CD', 'TE', 'PEP', 'AS', 'DU', 'CCEX', 'CEEX', 'PAEX', 'SCEX', 'CDEX', 'TEX', 'RNEX', 'PEPEX', 'ASEX')),
-    CONSTRAINT CHK_identificacion CHECK (identificacion LIKE '[a-z0-9]{6,}'),
-    CONSTRAINT CHK_correo CHECK (correo LIKE '%_@_%._%') -- Simplified for basic email validation
+    CONSTRAINT CHK_tipoDocumento CHECK (tipoDocumento IN ('CC', 'CE', 'PA', 'SC', 'CD', 'TE', 'PEP', 'AS', 'DU', 'CCEX', 'CEEX', 'PAEX', 'SCEX', 'CDEX', 'TEX', 'RNEX', 'PEPEX', 'ASEX'))
 );
 
 DROP TABLE IF EXISTS pais  ;
 CREATE TABLE pais(
     idPais INT IDENTITY(1,1) NOT NULL,
     codigoPais INT NOT NULL,
-    nombrePais VARCHAR(60) NOT NULL,
+    nombrePais VARCHAR(60) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
 
     CONSTRAINT PK_idPais PRIMARY KEY (idPais),
     CONSTRAINT CHK_codigoPais CHECK (codigoPais >= 0),
     CONSTRAINT UC_codigoPais UNIQUE (codigoPais),
-    CONSTRAINT CHK_nombrePais CHECK (nombrePais LIKE '[A-Z][a-zñ]{3,}[^0-9][^a-z][^A-Z][_]$'),
     CONSTRAINT UC_nombrePais UNIQUE (nombrePais)
 );
 
@@ -83,13 +76,12 @@ DROP TABLE IF EXISTS departamento  ;
 CREATE TABLE departamento(
     idDepartamento INT IDENTITY(1,1) NOT NULL,
     codigoDepartamento INT NOT NULL,
-    nombreDepartamento VARCHAR(60) NOT NULL,
+    nombreDepartamento VARCHAR(60) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
     idPais INT NOT NULL,
 
     CONSTRAINT PK_idDepartamento PRIMARY KEY (idDepartamento),
     CONSTRAINT CHK_codigoDepartamento CHECK ( codigoDepartamento  >= 0),
     CONSTRAINT UC_codigoDepartamento UNIQUE (codigoDepartamento),
-    CONSTRAINT CHK_nombreDepartamento CHECK (nombreDepartamento LIKE '[A-Z][a-zñ]{3,}[^0-9][^a-z][^A-Z][_]$'),
     CONSTRAINT UC_nombreDepartamento UNIQUE (nombreDepartamento),
     CONSTRAINT FK_idPais FOREIGN KEY (idPais) REFERENCES pais(idPais) ON DELETE CASCADE
 );
@@ -98,13 +90,12 @@ DROP TABLE IF EXISTS municipio  ;
 CREATE TABLE municipio(
     idMunicipio INT IDENTITY(1,1) NOT NULL,
     codigoMunicipio INT NOT NULL,
-    nombreMunicipio VARCHAR(60) NOT NULL,
+    nombreMunicipio VARCHAR(60) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
     idDepartamento INT NOT NULL,
 
     CONSTRAINT PK_idMunicipio PRIMARY KEY (idMunicipio),
     CONSTRAINT CHK_codigoMunicipio CHECK ( codigoMunicipio  >= 0),
     CONSTRAINT UC_codigoMunicipio UNIQUE (codigoMunicipio),
-    CONSTRAINT CHK_nombreMunicipio CHECK (nombreMunicipio LIKE '[A-Z][a-zñ]{3,}[^0-9][^a-z][^A-Z][_]$'),
     CONSTRAINT UC_nombreMunicipio UNIQUE (nombreMunicipio),
     CONSTRAINT FK_idDepartamento FOREIGN KEY (idDepartamento) REFERENCES departamento(idDepartamento) ON DELETE CASCADE
 );
@@ -114,40 +105,35 @@ CREATE TABLE cliente(
     idCliente INT IDENTITY(1,1) NOT NULL,
     idUsuario INT NOT NULL,
     numeroContacto VARCHAR(15) NOT NULL,
-    direccion VARCHAR(40) NOT NULL,
+    direccion VARCHAR(40) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
     idMunicipio INT NOT NULL,
     sexo CHAR NOT NULL,
     tipoDeSangre VARCHAR(3) NOT NULL,
-    eps VARCHAR(60) NOT NULL,
+    eps VARCHAR(60) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
     estadoCliente BIT NOT NULL DEFAULT 1,
     
     CONSTRAINT PK_idCliente PRIMARY KEY (idCliente),
     CONSTRAINT FK_idUsuario FOREIGN KEY (idUsuario) REFERENCES usuario(idUsuario) ON DELETE CASCADE,
-    CONSTRAINT CHK_numeroContacto CHECK (numeroContacto LIKE '^\+?[0-9]{1,3}[0-9]{7,}$'),
-    CONSTRAINT CHK_direccion CHECK (direccion LIKE '[A-Z][a-zñ]{3,}[^0-9][^a-z][^A-Z][_]$'),
     CONSTRAINT FK_idMunicipio FOREIGN KEY (idMunicipio) REFERENCES municipio(idMunicipio) ON DELETE CASCADE,
     CONSTRAINT CHK_sexo CHECK (sexo IN ('H', 'M')),
     CONSTRAINT CHK_tipoDeSangre CHECK (tipoDeSangre IN ('A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-')),
-    CONSTRAINT CHK_eps CHECK (eps LIKE '[A-Z][a-zñ]{3,}[^0-9][^a-z][^A-Z][_]$')
 );
 
 DROP TABLE IF EXISTS actividad  ;
 CREATE TABLE actividad(
     idActividad INT IDENTITY(1,1) NOT NULL,
-    nombreActividad VARCHAR(60) NOT NULL,
+    nombreActividad VARCHAR(60) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
 
     CONSTRAINT PK_idActividad PRIMARY KEY (idActividad),
-    CONSTRAINT CHK_nombreActividad CHECK (nombreActividad LIKE '[A-Z][a-zñ]{3,}[^0-9][^a-z][^A-Z][_]$'),
     CONSTRAINT UC_nombreActividad UNIQUE (nombreActividad)
 );
 
 DROP TABLE IF EXISTS categoriaServicio  ;
 CREATE TABLE categoriaServicio(
     idCategoriaServicio INT IDENTITY(1,1) NOT NULL,
-    nombreCategoriaServicio VARCHAR(60) NOT NULL,
+    nombreCategoriaServicio VARCHAR(60) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
 
     CONSTRAINT PK_categoriaServicio PRIMARY KEY (idCategoriaServicio),
-    CONSTRAINT CHK_nombreCategoriaServicio CHECK (nombreCategoriaServicio LIKE '[A-Z][a-zñ]{3,}[^0-9][^a-z][^A-Z][_]$'),
     CONSTRAINT UC_nombreCategoriaServicio UNIQUE (nombreCategoriaServicio)
 );
 
@@ -155,21 +141,20 @@ DROP TABLE IF EXISTS servicio  ;
 CREATE TABLE servicio(
     idServicio INT IDENTITY(1,1) NOT NULL,
     idCategoriaServicio INT NOT NULL,
-    nombreServicio VARCHAR(60) NOT NULL,
+    nombreServicio VARCHAR(60) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
     valorServicio DECIMAL(15,2) NOT NULL,
     estadoServicio BIT NOT NULL DEFAULT 1,
     
     CONSTRAINT PK_Service PRIMARY KEY (idServicio),
     CONSTRAINT UC_nombreServicio UNIQUE (nombreServicio),
     CONSTRAINT FK_categoryService FOREIGN KEY (idCategoriaServicio) REFERENCES categoriaServicio(idCategoriaServicio) ON DELETE CASCADE,
-    CONSTRAINT CHK_nombreServicio CHECK (nombreServicio LIKE '[A-Z][a-zñ]{3,}[^0-9][^a-z][^A-Z][_]$'),
     CONSTRAINT CHK_valorServicio CHECK (valorServicio > 0)
 );
 
 DROP TABLE IF EXISTS paquete  ;
 CREATE TABLE  paquete (
     idPaquete INT IDENTITY(1,1) NOT NULL,
-    nombrePaquete  VARCHAR (60) NOT NULL,
+    nombrePaquete  VARCHAR (60) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
     idMunicipio INT NOT NULL,
     idActividad INT NOT NULL,
     nivelActividad DECIMAL(2,1) NOT NULL,
@@ -177,10 +162,9 @@ CREATE TABLE  paquete (
     reservaPaquete DECIMAL(15,2) NOT NULL,
     
     CONSTRAINT PK_paquete PRIMARY KEY (idPaquete),
-    CONSTRAINT CHK_nombrePaquetePackage  CHECK (nombrePaquete LIKE '[A-Z][a-zñ]{3,}[^0-9][^a-z][^A-Z][_]$'),
     CONSTRAINT FK_idMunicipioPaquete FOREIGN KEY (idMunicipio) REFERENCES municipio(idMunicipio) ON DELETE CASCADE,
     CONSTRAINT FK_idActividadPaquete FOREIGN KEY (idActividad) REFERENCES actividad(idActividad) ON DELETE CASCADE,
-    CONSTRAINT CHK_nivelActividad CHECK  (nivelActividad > 0),
+    CONSTRAINT CHK_nivelActividad CHECK  (nivelActividad >= 0),
     CONSTRAINT CHK_inversionPaquete CHECK  (inversionPaquete > 0),
     CONSTRAINT CHK_reservaPaquete CHECK  (reservaPaquete >= 0)
 );
@@ -196,7 +180,7 @@ CREATE TABLE detallePaqueteServicio(
     CONSTRAINT PK_idDetallePaqueteServicio PRIMARY KEY (idDetallePaqueteServicio),
     CONSTRAINT FK_idPackage FOREIGN KEY (idPaquete) REFERENCES paquete(idPaquete) ON DELETE CASCADE,
     CONSTRAINT FK_idService FOREIGN KEY (idServicio) REFERENCES servicio(idServicio) ON DELETE CASCADE,
-    CONSTRAINT CHK_cantidadServicioPaquete CHECK (cantidadServicioPaquete >= 2),
+    CONSTRAINT CHK_cantidadServicioPaquete CHECK (cantidadServicioPaquete > 0),
     CONSTRAINT CHK_valorServicioPaquete CHECK (valorServicioPaquete > 0)
 );
 
