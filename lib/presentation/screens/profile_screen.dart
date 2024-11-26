@@ -14,28 +14,26 @@ class ProfileScreen extends StatelessWidget {
       appBar: const AppBarWidget(
         title: "Perfil",
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Container(
-            padding: EdgeInsets.symmetric(
-              horizontal: horizontalValue,
-              vertical: verticalValue,
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Container(
+              padding: EdgeInsets.symmetric(
+                horizontal: horizontalValue,
+                vertical: verticalValue,
+              ),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.grey[400],
+              ),
+              child: Icon(
+                Icons.person,
+                size: iconSize,
+                color: Colors.white,
+              ),
             ),
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: Colors.grey[400],
-            ),
-            child: Icon(
-              Icons.person,
-              size: iconSize,
-              color: Colors.white,
-            ),
-          ),
-          const Center(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
+            const Column(
               children: [
                 DataWidget(hintText: "Nombres", dataText: "Alan Andrey"),
                 DataWidget(hintText: "Apellidos", dataText: "Sanchez Caro"),
@@ -45,25 +43,25 @@ class ProfileScreen extends StatelessWidget {
                 DataWidget(hintText: "Dirección", dataText: "Cl 9 # 9-9"),
               ],
             ),
-          ),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.red[colorValue],
-              foregroundColor: Colors.white,
-              padding: EdgeInsets.symmetric(
-                horizontal: horizontalValue,
-                vertical: verticalValue,
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.red[700],
+                foregroundColor: Colors.white,
+                padding: EdgeInsets.symmetric(
+                  horizontal: horizontalValue,
+                  vertical: verticalValue,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(borderRadiusValue),
+                ),
               ),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(borderRadiusValue),
-              ),
+              onPressed: () {
+                Navigator.pushReplacementNamed(context, "/home");
+              },
+              child: const Text("Cerrar sesión"),
             ),
-            onPressed: () {
-              Navigator.pushReplacementNamed(context, "/home");
-            },
-            child: const Text("Cerrar sesión"),
-          ),
-        ],
+          ],
+        ),
       ),
       bottomNavigationBar: const MenuWidget(
         currentIndex: 1,
