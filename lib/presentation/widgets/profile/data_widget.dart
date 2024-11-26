@@ -15,7 +15,6 @@ class DataWidget extends StatelessWidget {
     String fontFamily = "greycliffcf";
     double hintTextSize = 16;
     double labelTextSize = 18;
-
     return Column(
       children: [
         Text(
@@ -25,15 +24,15 @@ class DataWidget extends StatelessWidget {
             fontSize: labelTextSize,
             fontWeight: FontWeight.bold,
           ),
-        ),
-        Text(
-          dataText,
-          style: TextStyle(
-            fontFamily: fontFamily,
-            fontSize: hintTextSize,
+          Text(
+            dataText,
+            style: TextStyle(
+              fontFamily: fontFamily,
+              fontSize: hintTextSize,
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

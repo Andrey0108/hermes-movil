@@ -1,0 +1,6 @@
+double horizontalValue = 20;
+double verticalValue = 10;
+double borderRadiusValue = 8.0;
+double fontSize = 25;
+double iconSize = 100;
+int colorValue = 700;
