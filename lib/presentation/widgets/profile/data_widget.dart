@@ -15,14 +15,20 @@ class DataWidget extends StatelessWidget {
     String fontFamily = "greycliffcf";
     double hintTextSize = 16;
     double labelTextSize = 18;
-    return Column(
-      children: [
-        Text(
-          "$hintText: ",
-          style: TextStyle(
-            fontFamily: fontFamily,
-            fontSize: labelTextSize,
-            fontWeight: FontWeight.bold,
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 6),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(
+            "$hintText: ",
+            style: TextStyle(
+              fontFamily: fontFamily,
+              fontSize: labelTextSize,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 1.2,
+            ),
           ),
           Text(
             dataText,

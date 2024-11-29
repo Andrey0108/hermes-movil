@@ -1,5 +1,6 @@
 // ignore_for_file: library_private_types_in_public_api, avoid_print
 import 'package:flutter/material.dart';
+import 'package:hermes/presentation/values.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 class CalendarWidget extends StatefulWidget {
@@ -13,7 +14,10 @@ class _CalendarWidgetState extends State<CalendarWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+      padding: EdgeInsets.symmetric(
+        horizontal: horizontalValue,
+        vertical: verticalValue,
+      ),
       child: SfCalendar(
         view: CalendarView.week,
         firstDayOfWeek: 7,
