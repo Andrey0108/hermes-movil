@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hermes/presentation/widgets/appbar_widget.dart';
 import 'package:hermes/presentation/widgets/menu/menu_widget.dart';
-import 'package:hermes/presentation/widgets/package/datainfo_widget.dart';
+import 'package:hermes/presentation/widgets/package/card_widget.dart';
 import '../values.dart';
 
 class PackageScreen extends StatelessWidget {
@@ -24,8 +24,8 @@ class PackageScreen extends StatelessWidget {
             Text('🧳 MAMM'),
             Text("📆 Lunes, 25 de noviembre de 2024 | 06:00 - 08:00"),
             Text("🧩 Incluye: Transporte, Desayuno"),
-            Text("👤 Viajeros: 38"),
-            DatainfoWidget(),
+            Text("👤 Viajeros: 1"),
+            CardWidget(),
           ],
         ),
       ),
