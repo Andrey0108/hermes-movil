@@ -17,22 +17,20 @@ class DataWidget extends StatelessWidget {
     double labelTextSize = 18;
     return Column(
       children: [
-        Text(
-          "$hintText: ",
-          style: TextStyle(
-            fontFamily: fontFamily,
-            fontSize: labelTextSize,
-            fontWeight: FontWeight.bold,
-          ),
-          Text(
-            dataText,
+        Text("$hintText: ",
             style: TextStyle(
               fontFamily: fontFamily,
-              fontSize: hintTextSize,
-            ),
+              fontSize: labelTextSize,
+              fontWeight: FontWeight.bold,
+            )),
+        Text(
+          dataText,
+          style: TextStyle(
+            fontFamily: fontFamily,
+            fontSize: hintTextSize,
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
