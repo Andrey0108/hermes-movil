@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hermes/data/models/package/package_model.dart';
 import 'presentation/screens/index.dart';
 
 void main() => runApp(MyApp());
@@ -9,7 +10,20 @@ class MyApp extends StatelessWidget {
   final _routes = {
     "/": (context) => const LoginScreen(),
     "/home": (context) => const HomeScreen(),
-    "/package": (context) => const PackageScreen(),
+    "/package": (context) => PackageScreen(
+          package: Package(
+              1,
+              "MAMM",
+              "Lunes 02 de Diciembre del 2024",
+              [
+                "Desayuno",
+                "Almuerzo",
+                "Cena",
+                "Hospedaje",
+                "Transporte",
+              ],
+              1),
+        ),
     "/profile": (context) => const ProfileScreen(),
   };
 
