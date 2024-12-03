@@ -25,7 +25,8 @@ class _CalendarWidgetState extends State<CalendarWidget> {
         //initialSelectedDate: DateTime(2021, 03, 01, 08, 30),
         dataSource: PackageDataSource(getAppointments()),
         onTap: (calendarTapDetails) => {
-          Navigator.pushNamed(context, "/package"),
+          if (calendarTapDetails.targetElement == CalendarElement.appointment)
+            Navigator.pushNamed(context, "/package"),
         },
       ),
     );
