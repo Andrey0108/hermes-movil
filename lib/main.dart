@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(
             seedColor: Colors.blue,
           ),
-          fontFamily: "TTMasters",
+          fontFamily: "greycliff",
         ),
         initialRoute: "/",
         routes: _routes,
