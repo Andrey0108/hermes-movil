@@ -1,40 +1,41 @@
 import 'package:flutter/material.dart';
+import 'package:hermes/data/models/travel/travel_model.dart';
 import 'package:hermes/presentation/values.dart';
 
-class CardWidget extends StatelessWidget {
-  const CardWidget({super.key});
+class TravelItem extends StatelessWidget {
+  const TravelItem({super.key, required this.travel});
+
+  final Travel travel;
 
   @override
   Widget build(BuildContext context) {
-    String nombre = "Juan Quintero";
-    String contacto = "3332550534";
-    bool viaja = true;
-
     return Card(
-      elevation: 5,
+      elevation: elevationValue,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(borderRadiusValue),
       ),
-      shadowColor: viaja == true ? Colors.green : Colors.red,
+      shadowColor: travel.viaja == true ? Colors.green : Colors.red,
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Padding(
             padding: EdgeInsets.symmetric(
-                vertical: verticalValue, horizontal: horizontalValue),
+              vertical: verticalValue,
+              horizontal: horizontalValue,
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(nombre),
-                Text(contacto),
+                Text(travel.nombre),
+                Text(travel.contacto),
               ],
             ),
           ),
           TextButton(
-            child: Text(viaja == true ? 'Viaja' : 'No viaja',
+            child: Text(travel.viaja == true ? 'Viaja' : 'No viaja',
                 style: TextStyle(
                     fontSize: fontSize,
-                    color: viaja == true
+                    color: travel.viaja == true
                         ? Colors.green[colorValue]
                         : Colors.red[colorValue])),
             onPressed: () {/* ... */},
