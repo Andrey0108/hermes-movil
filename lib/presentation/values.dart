@@ -3,5 +3,7 @@ double verticalValue = 10;
 double borderRadiusValue = 8.0;
 double fontSize = 25;
 double iconSize = 100;
+double iconSizeMd = 80;
 int colorValue = 700;
 double elevationValue = 5;
+double borderWidthValue = 2;
