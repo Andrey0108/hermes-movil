@@ -12,7 +12,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       appBar: AppBarWidget(
-        title: "Fruits",
+        title: "Paquetes",
       ),
       body: CalendarWidget(),
       bottomNavigationBar: MenuWidget(

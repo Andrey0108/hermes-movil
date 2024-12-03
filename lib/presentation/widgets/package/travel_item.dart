@@ -18,8 +18,8 @@ class TravelItem extends StatelessWidget {
       ),
       shadowColor: travel.viaja == true ? Colors.green : Colors.red,
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Card(
             shape: RoundedRectangleBorder(
@@ -37,11 +37,22 @@ class TravelItem extends StatelessWidget {
             ),
           ),
           Column(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Text(travel.nombre),
+              Text(travel.nombre,
+                  style: const TextStyle(fontWeight: FontWeight.bold)),
               Text(travel.contacto),
+            ],
+          ),
+          Column(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              IconButton(onPressed: () {}, icon: const Icon(Icons.phone)),
+              IconButton(onPressed: () {}, icon: const Icon(Icons.cancel)),
             ],
           ),
         ],
