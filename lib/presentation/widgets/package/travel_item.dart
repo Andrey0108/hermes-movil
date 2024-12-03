@@ -18,23 +18,31 @@ class TravelItem extends StatelessWidget {
       ),
       shadowColor: travel.viaja == true ? Colors.green : Colors.red,
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Card(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(
+                borderRadiusValue,
+              ),
+              side: BorderSide(
+                color: travel.viaja == true ? Colors.green : Colors.red,
+                width: borderWidthValue,
+              ),
+            ),
+            child: Icon(
+              Icons.person,
+              size: iconSizeMd,
+            ),
+          ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Text(travel.nombre),
               Text(travel.contacto),
             ],
-          ),
-          TextButton(
-            child: Text(travel.viaja == true ? 'Viaja' : 'No viaja',
-                style: TextStyle(
-                    fontSize: fontSize,
-                    color: travel.viaja == true
-                        ? Colors.green[colorValue]
-                        : Colors.red[colorValue])),
-            onPressed: () {/* ... */},
           ),
         ],
       ),
