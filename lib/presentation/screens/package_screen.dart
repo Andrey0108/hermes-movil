@@ -26,8 +26,8 @@ class PackageScreen extends StatelessWidget {
             vertical: verticalValue,
           ),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               PackageItem(package: package),
               SizedBox(

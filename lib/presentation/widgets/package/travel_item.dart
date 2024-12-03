@@ -9,53 +9,61 @@ class TravelItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: elevationValue,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(
-          borderRadiusValue,
+    return SizedBox(
+      height: 100,
+      child: Card(
+        elevation: elevationValue,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(
+            borderRadiusValue,
+          ),
         ),
-      ),
-      shadowColor: travel.viaja == true ? Colors.green : Colors.red,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Card(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(
-                borderRadiusValue,
-              ),
-              side: BorderSide(
-                color: travel.viaja == true ? Colors.green : Colors.red,
-                width: borderWidthValue,
+        shadowColor: travel.viaja == true ? Colors.green : Colors.red,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SizedBox(
+              width: 80,
+              height: double.infinity,
+              child: Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(
+                    borderRadiusValue,
+                  ),
+                  side: BorderSide(
+                    color: travel.viaja == true ? Colors.green : Colors.red,
+                    width: borderWidthValue,
+                  ),
+                ),
+                child: Icon(
+                  Icons.person,
+                  size: iconSizeMd,
+                ),
               ),
             ),
-            child: Icon(
-              Icons.person,
-              size: iconSizeMd,
+            SizedBox(
+              width: 180,
+              height: double.infinity,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(travel.nombre,
+                      style: const TextStyle(fontWeight: FontWeight.bold)),
+                  Text(travel.contacto),
+                ],
+              ),
             ),
-          ),
-          Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(travel.nombre,
-                  style: const TextStyle(fontWeight: FontWeight.bold)),
-              Text(travel.contacto),
-            ],
-          ),
-          Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              IconButton(onPressed: () {}, icon: const Icon(Icons.phone)),
-              IconButton(onPressed: () {}, icon: const Icon(Icons.cancel)),
-            ],
-          ),
-        ],
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                IconButton(onPressed: () {}, icon: const Icon(Icons.phone)),
+                IconButton(onPressed: () {}, icon: const Icon(Icons.cancel)),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
