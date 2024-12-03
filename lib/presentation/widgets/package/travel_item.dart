@@ -12,24 +12,20 @@ class TravelItem extends StatelessWidget {
     return Card(
       elevation: elevationValue,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(borderRadiusValue),
+        borderRadius: BorderRadius.circular(
+          borderRadiusValue,
+        ),
       ),
       shadowColor: travel.viaja == true ? Colors.green : Colors.red,
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          Padding(
-            padding: EdgeInsets.symmetric(
-              vertical: verticalValue,
-              horizontal: horizontalValue,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(travel.nombre),
-                Text(travel.contacto),
-              ],
-            ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(travel.nombre),
+              Text(travel.contacto),
+            ],
           ),
           TextButton(
             child: Text(travel.viaja == true ? 'Viaja' : 'No viaja',

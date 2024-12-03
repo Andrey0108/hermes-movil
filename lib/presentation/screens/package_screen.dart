@@ -31,19 +31,28 @@ class PackageScreen extends StatelessWidget {
             Text("📅 Fecha: ${package.fecha}"),
             Text("🛏️ Servicios: ${package.servicios.length}"),
             Text("👤 Viajeros: ${package.viajeros}"),
-            Center(
-              child: FutureBuilder<List<Travel>>(
-                future: Future.value([
-                  Travel(1, "Felipe", "333255", true),
-                  Travel(2, "Juan", "333255", true)
-                ]),
-                builder: (context, snapshot) {
-                  if (snapshot.hasError) print(snapshot.error);
-                  return snapshot.hasData
-                      ? TravelList(items: snapshot.data ?? [])
-                      : const Center(child: CircularProgressIndicator());
-                },
-              ),
+            FutureBuilder<List<Travel>>(
+              future: Future.value([
+                Travel(1, "Felipe", "333255", true),
+                Travel(2, "Juan", "333255", false),
+                Travel(3, "Pedro", "333255", true),
+                Travel(4, "Pablo", "333255", false),
+                Travel(5, "asd", "333255", false),
+                Travel(6, "fsd", "333255", false),
+                Travel(7, "sdf", "333255", false),
+                Travel(8, "sff", "333255", false),
+                Travel(8, "asdasf", "333255", false),
+              ]),
+              builder: (context, snapshot) {
+                if (snapshot.hasError) print(snapshot.error);
+                return snapshot.hasData
+                    ? TravelList(
+                        items: snapshot.data ?? [],
+                      )
+                    : CircularProgressIndicator(
+                        color: Colors.blue[colorValue],
+                      );
+              },
             ),
           ],
         ),

@@ -7,14 +7,21 @@ class TravelList extends StatelessWidget {
     super.key,
     required this.items,
   });
+
   final List<Travel> items;
+
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: items.length,
-      itemBuilder: (context, index) {
-        return TravelItem(travel: items[index]);
-      },
+    return SizedBox(
+      height: 400,
+      child: ListView.builder(
+        itemCount: items.length,
+        itemBuilder: (context, index) {
+          return TravelItem(
+            travel: items[index],
+          );
+        },
+      ),
     );
   }
 }
