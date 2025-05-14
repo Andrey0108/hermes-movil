@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
         title: 'Hermes',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(
-            seedColor: Colors.blue,
+            seedColor: Colors.greenAccent,
           ),
           fontFamily: "greycliff",
         ),
