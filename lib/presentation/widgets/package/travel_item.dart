@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:hermes/data/models/travel/travel_model.dart';
+import 'package:hermes/models/user_model.dart';
 import 'package:hermes/presentation/values.dart';
 
 class TravelItem extends StatelessWidget {
-  const TravelItem({super.key, required this.travel});
+  const TravelItem({super.key, required this.user});
 
-  final Travel travel;
+  final UserModel user;
 
   @override
   Widget build(BuildContext context) {
@@ -14,11 +14,9 @@ class TravelItem extends StatelessWidget {
       child: Card(
         elevation: elevationValue,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(
-            borderRadiusValue,
-          ),
+          borderRadius: BorderRadius.circular(borderRadiusValue),
         ),
-        shadowColor: travel.viaja == true ? Colors.green : Colors.red,
+        shadowColor: user.status == true ? Colors.green : Colors.red,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -28,18 +26,13 @@ class TravelItem extends StatelessWidget {
               height: double.infinity,
               child: Card(
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(
-                    borderRadiusValue,
-                  ),
+                  borderRadius: BorderRadius.circular(borderRadiusValue),
                   side: BorderSide(
-                    color: travel.viaja == true ? Colors.green : Colors.red,
+                    color: user.status == true ? Colors.green : Colors.red,
                     width: borderWidthValue,
                   ),
                 ),
-                child: Icon(
-                  Icons.person,
-                  size: iconSizeMd,
-                ),
+                child: Icon(Icons.person, size: iconSizeMd),
               ),
             ),
             SizedBox(
@@ -49,9 +42,11 @@ class TravelItem extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(travel.nombre,
-                      style: const TextStyle(fontWeight: FontWeight.bold)),
-                  Text(travel.contacto),
+                  Text(
+                    user.name,
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  Text(user.phone),
                 ],
               ),
             ),

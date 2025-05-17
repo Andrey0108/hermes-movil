@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hermes/data/models/package/package_model.dart';
+import 'package:hermes/models/package_model.dart';
 import 'package:hermes/presentation/values.dart';
 
 class PackageItem extends StatelessWidget {
@@ -14,13 +14,8 @@ class PackageItem extends StatelessWidget {
       child: Card(
         elevation: elevationValue,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(
-            borderRadiusValue,
-          ),
-          side: BorderSide(
-            color: Colors.black,
-            width: borderWidthValue,
-          ),
+          borderRadius: BorderRadius.circular(borderRadiusValue),
+          side: BorderSide(color: Colors.black, width: borderWidthValue),
         ),
         shadowColor: Colors.black,
         borderOnForeground: true,
@@ -32,12 +27,7 @@ class PackageItem extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Text("📝 Nombre: ${package.nombre}"),
-              Text("📅 Fecha: ${package.fecha}"),
-              Text("🛏️ Servicios: ${package.servicios.length}"),
-              Text("👤 Viajeros: ${package.viajeros}"),
-            ],
+            children: [Text("📝 Nombre: ${package.name}")],
           ),
         ),
       ),

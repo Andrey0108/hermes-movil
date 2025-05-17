@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hermes/data/models/travel/travel_model.dart';
+import 'package:hermes/models/user_model.dart';
 import 'package:hermes/presentation/widgets/package/travel_item.dart';
 
 class TravelList extends StatelessWidget {
@@ -8,7 +8,7 @@ class TravelList extends StatelessWidget {
     required this.items,
   });
 
-  final List<Travel> items;
+  final List<UserModel> items;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ class TravelList extends StatelessWidget {
       itemCount: items.length,
       itemBuilder: (context, index) {
         return TravelItem(
-          travel: items[index],
+          user: items[index],
         );
       },
     );
