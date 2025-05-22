@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:hermes/presentation/widgets/image_widget.dart';
 import 'package:hermes/presentation/widgets/login/field_widget.dart';
 import 'package:hermes/services/auth_service.dart';
-import 'package:http/http.dart' as http;
 
 import '../values.dart';
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+  // Suggested code may be subject to a license. Learn more: ~LicenseLog:4184187990.
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +20,7 @@ class LoginScreen extends StatelessWidget {
         children: [
           Text("Iniciar sesión", style: TextStyle(fontSize: fontSize)),
           const ImageWidget(image: "hermes.png"),
-          const Column(
+          Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               FieldWidget(
