@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:hermes/presentation/widgets/image_widget.dart';
 import 'package:hermes/presentation/widgets/login/field_widget.dart';
+import 'package:hermes/services/auth_service.dart';
+import 'package:http/http.dart' as http;
 
 import '../values.dart';
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({
-    super.key,
-  });
+  const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,12 +15,7 @@ class LoginScreen extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
-            "Iniciar sesión",
-            style: TextStyle(
-              fontSize: fontSize,
-            ),
-          ),
+          Text("Iniciar sesión", style: TextStyle(fontSize: fontSize)),
           const ImageWidget(image: "hermes.png"),
           const Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -28,10 +23,13 @@ class LoginScreen extends StatelessWidget {
               FieldWidget(
                 hintText: "Correo",
                 oscureText: false,
+                controller: _emailController,
               ),
+              SizedBox(height: 20),
               FieldWidget(
                 hintText: "Contraseña",
                 oscureText: true,
+                controller: _passwordController,
               ),
             ],
           ),
@@ -47,12 +45,42 @@ class LoginScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(borderRadiusValue),
               ),
             ),
-            onPressed: () {
-              // redirigir a la pantalla de home
-              Navigator.pushReplacementNamed(context, "/home");
+            onPressed: () async {
+              try {
+                final response = await login(
+                  _emailController.text,
+                  _passwordController.text,
+                );
+
+                if (response.statusCode == 200) {
+                  // Login successful
+                  print('Inicio de sesión exitoso: ${response.body}');
+                  // Navigate to home screen
+                  Navigator.pushReplacementNamed(context, "/home");
+                } else {
+                  // Login failed
+                  print('Error de inicio de sesión: ${response.statusCode}');
+                  print('Mensaje de error: ${response.body}');
+                  // Show an error message to the user
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(
+                        'Error de inicio de sesión: ${response.statusCode}',
+                      ),
+                    ),
+                  );
+                }
+              } catch (e) {
+                // Handle network or other errors from the login function
+                print('Error durante el inicio de sesión: $e');
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('Error al conectar con el servidor.')),
+                );
+              }
             },
+
             child: const Text("Ingresar"),
-          )
+          ),
           // Add the login form here
         ],
       ),

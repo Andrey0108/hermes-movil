@@ -1,50 +1,50 @@
 import 'package:flutter/material.dart';
+import 'package:hermes/presentation/values.dart';
 
 class FieldWidget extends StatefulWidget {
-  const FieldWidget(
-      {super.key, required this.hintText, required this.oscureText});
-
   final String hintText;
   final bool oscureText;
+  final TextEditingController controller; // Add this property
+
+  const FieldWidget({
+    Key? key,
+    required this.hintText,
+    required this.oscureText,
+    required this.controller, // Make it required in the constructor
+  }) : super(key: key);
 
   @override
   State<FieldWidget> createState() => _FieldWidgetState();
 }
 
 class _FieldWidgetState extends State<FieldWidget> {
-  double horizontalValue = 20;
-  double verticalValue = 10;
-  double borderRadiusValue = 8.0;
-
   bool viewPass = false;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: horizontalValue,
-        vertical: verticalValue,
-      ),
-      child: TextFormField(
-          obscureText: widget.oscureText,
-          decoration: InputDecoration(
-            labelText: widget.hintText,
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(borderRadiusValue),
-            ),
-            suffixIcon: widget.oscureText
+    return TextFormField(
+      controller: widget.controller, // Assign the controller here
+      obscureText:
+          widget.oscureText && !viewPass, // Modify this to use viewPass
+      decoration: InputDecoration(
+        labelText: widget.hintText,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(borderRadiusValue),
+        ),
+        suffixIcon:
+            widget.oscureText
                 ? IconButton(
-                    icon: Icon(
-                      viewPass ? Icons.visibility : Icons.visibility_off,
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        viewPass = !viewPass;
-                      });
-                    },
-                  )
+                  icon: Icon(
+                    viewPass ? Icons.visibility : Icons.visibility_off,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      viewPass = !viewPass;
+                    });
+                  },
+                )
                 : const Icon(Icons.email),
-          )),
+      ),
     );
   }
 }
