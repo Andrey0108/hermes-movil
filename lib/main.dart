@@ -7,7 +7,7 @@ class MyApp extends StatelessWidget {
   MyApp({super.key});
 
   final _routes = {
-    "/": (context) => const LoginScreen(),
+    "/": (context) => LoginScreen(),
     "/home": (context) => const HomeScreen(),
     "/package": (context) => PackageScreen(),
     "/profile": (context) => const ProfileScreen(),

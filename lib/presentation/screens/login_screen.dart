@@ -55,7 +55,7 @@ class LoginScreen extends StatelessWidget {
                   _passwordController.text,
                 );
 
-                if (response.statusCode == 200) {
+                if (response.statusCode == 201) {
                   // Login successful
                   print('Inicio de sesión exitoso: ${response.body}');
                   // Navigate to home screen
