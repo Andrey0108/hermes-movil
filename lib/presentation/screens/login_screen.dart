@@ -56,15 +56,11 @@ class LoginScreen extends StatelessWidget {
                 );
 
                 if (response.statusCode == 201) {
-                  // Login successful
                   print('Inicio de sesión exitoso: ${response.body}');
-                  // Navigate to home screen
                   Navigator.pushReplacementNamed(context, "/home");
                 } else {
-                  // Login failed
                   print('Error de inicio de sesión: ${response.statusCode}');
                   print('Mensaje de error: ${response.body}');
-                  // Show an error message to the user
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       content: Text(
@@ -74,7 +70,6 @@ class LoginScreen extends StatelessWidget {
                   );
                 }
               } catch (e) {
-                // Handle network or other errors from the login function
                 print('Error durante el inicio de sesión: $e');
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(content: Text('Error al conectar con el servidor.')),
@@ -84,7 +79,6 @@ class LoginScreen extends StatelessWidget {
 
             child: const Text("Ingresar"),
           ),
-          // Add the login form here
         ],
       ),
     );
