@@ -11,10 +11,10 @@ Future<http.Response> login(String email, String password) async {
     final response = await http.post(url, headers: headers, body: body);
     if (response.statusCode == 200) {
       final responseData = jsonDecode(response.body);
-      final token =
-          responseData['token']; // Asumiendo que el token está en la respuesta
+      print(responseData);
+      final token = responseData['token'];
       final prefs = await SharedPreferences.getInstance();
-      await prefs.setString('jwt_token', token); // Guardar el token
+      await prefs.setString('jwt_token', token);
     }
     return response;
   } catch (e) {
