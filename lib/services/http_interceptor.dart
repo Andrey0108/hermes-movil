@@ -12,7 +12,7 @@ class HttpInterceptor extends http.BaseClient {
     final token = prefs.getString('jwt_token');
 
     if (token != null) {
-      request.headers['Authorization'] = 'Bearer $token'; // Adjuntar el token
+      request.headers['Authorization'] = 'Bearer $token';
     }
 
     return _inner.send(request);

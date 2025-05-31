@@ -36,8 +36,14 @@ class _CalendarWidgetState extends State<CalendarWidget> {
 List<Appointment> getAppointments() {
   List<Appointment> packages = <Appointment>[];
   final DateTime today = DateTime.now();
-  final DateTime startTime =
-      DateTime(today.year, today.month, today.day, 6, 0, 0);
+  final DateTime startTime = DateTime(
+    today.year,
+    today.month,
+    today.day,
+    6,
+    0,
+    0,
+  );
   final DateTime endTime = startTime.add(const Duration(hours: 2));
 
   packages.add(
