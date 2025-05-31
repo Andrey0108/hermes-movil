@@ -14,8 +14,6 @@ class PackageScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var package = Package();
-
     return Scaffold(
       appBar: const AppBarWidget(title: "Paquete"),
       body: Container(
@@ -27,7 +25,21 @@ class PackageScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            PackageItem(package: package),
+            PackageItem(
+              package: Package(
+                id: 1,
+                name: "Paquete de Aventura",
+                idActivity: 1,
+                idMunicipality: 1,
+                level: 2,
+                price: 100,
+                reserve: 10,
+                description: "Un paquete lleno de aventuras emocionantes.",
+                image: "assets/images/package.jpg",
+                status: true,
+                detailPackagesServices: [],
+              ),
+            ),
             SizedBox(
               height: 378,
               child: FutureBuilder<List<UserModel>>(
