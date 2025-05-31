@@ -1,8 +1,7 @@
 // ignore_for_file: avoid_print
 
 import 'package:flutter/material.dart';
-import 'package:hermes/models/package_model.dart';
-import 'package:hermes/models/user_model.dart';
+import 'package:hermes/models/index.dart';
 import 'package:hermes/presentation/widgets/appbar_widget.dart';
 import 'package:hermes/presentation/widgets/menu/menu_widget.dart';
 import 'package:hermes/presentation/widgets/package/package_item.dart';
@@ -26,7 +25,7 @@ class PackageScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             PackageItem(
-              package: Package(
+              package: PackageModel(
                 id: 1,
                 name: "Paquete de Aventura",
                 idActivity: 1,

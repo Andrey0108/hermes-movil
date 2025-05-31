@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:hermes/models/package_model.dart';
+import 'package:hermes/models/index.dart';
 import 'package:hermes/presentation/values.dart';
 
 class PackageItem extends StatelessWidget {
   const PackageItem({super.key, required this.package});
 
-  final Package package;
+  final PackageModel package;
 
   @override
   Widget build(BuildContext context) {

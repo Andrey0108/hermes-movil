@@ -13,12 +13,14 @@ class CalendarWidget extends StatefulWidget {
 }
 
 class _CalendarWidgetState extends State<CalendarWidget> {
-  List<Package> packages = [];
+  List<PackageModel> packages = [];
+  List<ProgrammingModel> programming = [];
 
   @override
   void initState() {
     super.initState();
     _loadPackages();
+    _loadProgramming();
   }
 
   Future<void> _loadPackages() async {
@@ -32,6 +34,17 @@ class _CalendarWidgetState extends State<CalendarWidget> {
     }
   }
 
+  Future<void> _loadProgramming() async {
+    try {
+      final fetchedProgramming = await getAllByResponsible(1);
+      setState(() {
+        programming = fetchedProgramming;
+      });
+    } catch (e) {
+      print('Error loading programming: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -42,7 +55,7 @@ class _CalendarWidgetState extends State<CalendarWidget> {
       child: SfCalendar(
         view: CalendarView.week,
         firstDayOfWeek: 7,
-        dataSource: PackageDataSource(_convertPackagesToAppointments()),
+        dataSource: PackageDataSource(_convertProgrammingToAppointments()),
         onTap: (calendarTapDetails) => {
           if (calendarTapDetails.targetElement == CalendarElement.appointment)
             Navigator.pushNamed(context, "/package"),
@@ -51,14 +64,17 @@ class _CalendarWidgetState extends State<CalendarWidget> {
     );
   }
 
-  List<Appointment> _convertPackagesToAppointments() {
-    return packages.map((package) {
+  List<Appointment> _convertProgrammingToAppointments() {
+    return programming.map((program) {
       return Appointment(
-        startTime: package.startTime,
-        endTime: package.endTime,
-        subject: package.name,
-        color:
-            Colors.blue, // Puedes ajustar el color según el estado del paquete
+        startTime: program.start,
+        endTime: program.end,
+        subject: packages.firstWhere((pkg) => pkg.id == program.idPackage).name,
+        color: program.status
+            ? packages.firstWhere((pkg) => pkg.id == program.idPackage).status
+                  ? Colors.green
+                  : Colors.red
+            : Colors.grey,
       );
     }).toList();
   }

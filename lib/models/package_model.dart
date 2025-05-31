@@ -1,6 +1,6 @@
 import 'package:hermes/models/index.dart';
 
-class Package {
+class PackageModel {
   final int id;
   final String name;
   final int idActivity;
@@ -13,7 +13,7 @@ class Package {
   final bool status;
   final List<PackageServiceModel> detailPackagesServices;
 
-  Package({
+  PackageModel({
     required this.id,
     required this.name,
     required this.idActivity,
@@ -27,8 +27,8 @@ class Package {
     required this.detailPackagesServices,
   });
 
-  factory Package.fromJson(Map<String, dynamic> json) {
-    return Package(
+  factory PackageModel.fromJson(Map<String, dynamic> json) {
+    return PackageModel(
       id: json['id'] ?? 0,
       name: json['name'] ?? "",
       idActivity: json['idActivity'] ?? 0,

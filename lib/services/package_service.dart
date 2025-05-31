@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import '../config.dart';
 
-Future<List<Package>> getAllPackages() async {
+Future<List<PackageModel>> getAllPackages() async {
   final url = Uri.parse('$baseUrl/packages/');
   final headers = {'Content-Type': 'application/json'};
 
@@ -11,8 +11,8 @@ Future<List<Package>> getAllPackages() async {
     final response = await http.get(url, headers: headers);
     if (response.statusCode == 200) {
       List<dynamic> data = jsonDecode(response.body);
-      List<Package> packages = data
-          .map((item) => Package.fromJson(item))
+      List<PackageModel> packages = data
+          .map((item) => PackageModel.fromJson(item))
           .toList();
       return packages;
     } else {
