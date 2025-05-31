@@ -1,9 +1,10 @@
 import 'package:http/http.dart' as http;
+import '../config.dart'; // Importa el archivo de configuración
 
 Future<http.Response> login(int idResponsible, String token) async {
   final url = Uri.parse(
-    'http://localhost:3000/datesresponsible/$idResponsible',
-  );
+    '$baseUrl/dates/responsible/$idResponsible',
+  ); // Usa la URL base
   final headers = {
     'Content-Type': 'application/json',
     'Authorization': 'Bearer $token',
@@ -12,7 +13,6 @@ Future<http.Response> login(int idResponsible, String token) async {
   try {
     return await http.post(url, headers: headers);
   } catch (e) {
-    print(e);
-    rethrow;
+    throw Exception('Error during login: $e');
   }
 }

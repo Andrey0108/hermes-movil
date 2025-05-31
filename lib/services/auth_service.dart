@@ -1,5 +1,6 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:shared_preferences/shared_preferences.dart'; // Importar para almacenamiento local
 
 Future<http.Response> login(String email, String password) async {
   final url = Uri.parse('http://localhost:3000/auth/log-in');
@@ -8,11 +9,15 @@ Future<http.Response> login(String email, String password) async {
 
   try {
     final response = await http.post(url, headers: headers, body: body);
-    print(response.body);
-    return response; // Return the response object
+    if (response.statusCode == 200) {
+      final responseData = jsonDecode(response.body);
+      final token =
+          responseData['token']; // Asumiendo que el token está en la respuesta
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString('jwt_token', token); // Guardar el token
+    }
+    return response;
   } catch (e) {
-    // Handle errors as needed, maybe re-throw or return a specific error response
-    print(e);
-    rethrow; // Re-throw the exception to be handled by the caller
+    throw Exception('Error during login: $e');
   }
 }
