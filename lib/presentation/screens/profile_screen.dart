@@ -11,9 +11,7 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const AppBarWidget(
-        title: "Perfil",
-      ),
+      appBar: const AppBarWidget(title: "Perfil"),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -27,18 +25,16 @@ class ProfileScreen extends StatelessWidget {
                 shape: BoxShape.circle,
                 color: Colors.grey[400],
               ),
-              child: Icon(
-                Icons.person,
-                size: iconSize,
-                color: Colors.white,
-              ),
+              child: Icon(Icons.person, size: iconSize, color: Colors.white),
             ),
             const Column(
               children: [
                 DataWidget(hintText: "Nombres", dataText: "Alan Andrey"),
                 DataWidget(hintText: "Apellidos", dataText: "Sanchez Caro"),
                 DataWidget(
-                    hintText: "Correo", dataText: "alansanchez123@gmail.com"),
+                  hintText: "Correo",
+                  dataText: "alansanchez123@gmail.com",
+                ),
                 DataWidget(hintText: "Teléfono", dataText: "3011111111"),
                 DataWidget(hintText: "Dirección", dataText: "Cl 9 # 9-9"),
               ],
@@ -63,9 +59,7 @@ class ProfileScreen extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: const MenuWidget(
-        currentIndex: 1,
-      ),
+      bottomNavigationBar: const MenuWidget(currentIndex: 1),
     );
   }
 }

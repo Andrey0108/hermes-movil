@@ -1,4 +1,4 @@
-import 'package:hermes/models/reservationTraveler_model.dart';
+import 'package:hermes/models/index.dart';
 
 class ReservationModel {
   final int id = 0;

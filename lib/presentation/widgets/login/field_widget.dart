@@ -31,19 +31,16 @@ class _FieldWidgetState extends State<FieldWidget> {
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(borderRadiusValue),
         ),
-        suffixIcon:
-            widget.oscureText
-                ? IconButton(
-                  icon: Icon(
-                    viewPass ? Icons.visibility : Icons.visibility_off,
-                  ),
-                  onPressed: () {
-                    setState(() {
-                      viewPass = !viewPass;
-                    });
-                  },
-                )
-                : const Icon(Icons.email),
+        suffixIcon: widget.oscureText
+            ? IconButton(
+                icon: Icon(viewPass ? Icons.visibility : Icons.visibility_off),
+                onPressed: () {
+                  setState(() {
+                    viewPass = !viewPass;
+                  });
+                },
+              )
+            : const Icon(Icons.email),
       ),
     );
   }

@@ -37,8 +37,8 @@ class PackageScreen extends StatelessWidget {
                   return snapshot.hasData
                       ? TravelList(items: snapshot.data ?? [])
                       : CircularProgressIndicator(
-                        color: Colors.blue[colorValue],
-                      );
+                          color: Colors.blue[colorValue],
+                        );
                 },
               ),
             ),

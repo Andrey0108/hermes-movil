@@ -7,10 +7,6 @@ class ImageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Image.asset(
-      'assets/img/$image',
-      fit: BoxFit.cover,
-      width: 200,
-    );
+    return Image.asset('assets/img/$image', fit: BoxFit.cover, width: 200);
   }
 }

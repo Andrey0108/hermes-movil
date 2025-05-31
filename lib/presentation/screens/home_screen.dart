@@ -11,13 +11,9 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      appBar: AppBarWidget(
-        title: "Paquetes",
-      ),
+      appBar: AppBarWidget(title: "Paquetes"),
       body: CalendarWidget(),
-      bottomNavigationBar: MenuWidget(
-        currentIndex: 0,
-      ),
+      bottomNavigationBar: MenuWidget(currentIndex: 0),
     );
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hermes/presentation/widgets/image_widget.dart';
 import 'package:hermes/presentation/widgets/login/field_widget.dart';
-import 'package:hermes/services/auth_service.dart';
+import 'package:hermes/services/index.dart';
 
 import '../values.dart';
 

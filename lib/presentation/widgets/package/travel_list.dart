@@ -3,10 +3,7 @@ import 'package:hermes/models/user_model.dart';
 import 'package:hermes/presentation/widgets/package/travel_item.dart';
 
 class TravelList extends StatelessWidget {
-  const TravelList({
-    super.key,
-    required this.items,
-  });
+  const TravelList({super.key, required this.items});
 
   final List<UserModel> items;
 
@@ -15,9 +12,7 @@ class TravelList extends StatelessWidget {
     return ListView.builder(
       itemCount: items.length,
       itemBuilder: (context, index) {
-        return TravelItem(
-          user: items[index],
-        );
+        return TravelItem(user: items[index]);
       },
     );
   }

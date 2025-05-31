@@ -17,7 +17,7 @@ class _MenuWidgetState extends State<MenuWidget> {
         if (value == 0)
           {Navigator.pushNamed(context, "/home")}
         else if (value == 1)
-          {Navigator.pushNamed(context, "/profile")}
+          {Navigator.pushNamed(context, "/profile")},
       },
       currentIndex: widget.currentIndex,
       items: const [
