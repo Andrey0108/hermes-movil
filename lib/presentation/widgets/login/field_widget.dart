@@ -7,11 +7,11 @@ class FieldWidget extends StatefulWidget {
   final TextEditingController controller; // Add this property
 
   const FieldWidget({
-    Key? key,
+    super.key,
     required this.hintText,
     required this.oscureText,
     required this.controller, // Make it required in the constructor
-  }) : super(key: key);
+  });
 
   @override
   State<FieldWidget> createState() => _FieldWidgetState();

@@ -8,10 +8,11 @@ Future<http.Response> login(String email, String password) async {
 
   try {
     final response = await http.post(url, headers: headers, body: body);
+    print(response.body);
     return response; // Return the response object
   } catch (e) {
     // Handle errors as needed, maybe re-throw or return a specific error response
-    print('Error al conectar con la API: $e');
+    print(e);
     rethrow; // Re-throw the exception to be handled by the caller
   }
 }
