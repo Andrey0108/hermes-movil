@@ -45,7 +45,13 @@ Future<void> _setTokens(String accessToken) async {
 
 Future<String?> _getAccessToken() async {
   final prefs = await SharedPreferences.getInstance();
-  return prefs.getString('jwt_token');
+  final token = prefs.getString('jwt_token');
+
+  if (token != null && !await isTokenExpired(token)) {
+    return token;
+  } else {
+    return null; // Retornar null si el token está expirado o no existe
+  }
 }
 
 Future<void> _updateCurrentUser(String token) async {

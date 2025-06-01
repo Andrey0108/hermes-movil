@@ -11,8 +11,10 @@ class HttpInterceptor extends http.BaseClient {
     final prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('jwt_token');
 
-    if (token != null) {
+    if (token != null && token.isNotEmpty) {
       request.headers['Authorization'] = 'Bearer $token';
+    } else {
+      print('Token no disponible para la solicitud');
     }
 
     return _inner.send(request);
