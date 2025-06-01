@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'presentation/screens/index.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   MyApp({super.key});

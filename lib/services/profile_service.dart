@@ -1,9 +1,11 @@
+import 'package:hermes/interceptors/index.dart';
 import 'package:hermes/models/index.dart';
 import 'package:hermes/services/index.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-
 import '../config.dart';
+
+final httpClient = HttpInterceptor(http.Client());
 
 Future<UserModel> getProfile() async {
   final currentUser = await getCurrentUser();
@@ -13,7 +15,7 @@ Future<UserModel> getProfile() async {
     throw Exception('Usuario no autenticado');
   }
 
-  final response = await http.get(Uri.parse('$baseUrl/users/$userId'));
+  final response = await httpClient.get(Uri.parse('$baseUrl/users/$userId'));
 
   if (response.statusCode == 200) {
     return UserModel.fromJson(json.decode(response.body));

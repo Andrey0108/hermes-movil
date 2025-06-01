@@ -14,9 +14,19 @@ class HttpInterceptor extends http.BaseClient {
     if (token != null && token.isNotEmpty) {
       request.headers['Authorization'] = 'Bearer $token';
     } else {
-      print('Token no disponible para la solicitud');
+      throw Exception(
+        'Token JWT no encontrado. Por favor, inicia sesión nuevamente.',
+      );
     }
 
-    return _inner.send(request);
+    final response = await _inner.send(request);
+
+    if (response.statusCode == 401) {
+      throw Exception(
+        'Token no válido o expirado. Por favor, inicia sesión nuevamente.',
+      );
+    }
+
+    return response;
   }
 }
