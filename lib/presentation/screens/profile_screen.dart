@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hermes/presentation/widgets/appbar_widget.dart';
 import 'package:hermes/presentation/widgets/menu/menu_widget.dart';
 import 'package:hermes/presentation/widgets/profile/data_widget.dart';
+import 'package:hermes/services/index.dart';
 
 import '../values.dart';
 
@@ -51,8 +52,23 @@ class ProfileScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(borderRadiusValue),
                 ),
               ),
-              onPressed: () {
-                Navigator.pushReplacementNamed(context, "/home");
+              onPressed: () async {
+                // Aquí se llamaría al servicio de logout
+                final response = await logout();
+                if (response.statusCode == 200 || response.statusCode == 201) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Sesión cerrada correctamente'),
+                    ),
+                  );
+                  Navigator.pushReplacementNamed(context, "/");
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('Error al cerrar sesión: ${response.body}'),
+                    ),
+                  );
+                }
               },
               child: const Text("Cerrar sesión"),
             ),
