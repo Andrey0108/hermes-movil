@@ -55,7 +55,7 @@ class ProfileScreen extends StatelessWidget {
               onPressed: () async {
                 // Aquí se llamaría al servicio de logout
                 final response = await logout();
-                if (response.statusCode == 200 || response.statusCode == 201) {
+                if (response) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
                       content: Text('Sesión cerrada correctamente'),
@@ -64,9 +64,7 @@ class ProfileScreen extends StatelessWidget {
                   Navigator.pushReplacementNamed(context, "/");
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text('Error al cerrar sesión: ${response.body}'),
-                    ),
+                    SnackBar(content: Text('Error al cerrar sesión')),
                   );
                 }
               },
