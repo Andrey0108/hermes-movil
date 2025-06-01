@@ -7,10 +7,11 @@ import '../config.dart';
 
 final httpClient = HttpInterceptor(http.Client());
 
-Future<List<ProgrammingModel>> getAllByResponsible(int idResponsible) async {
+Future<List<ProgrammingModel>> getAllByResponsible() async {
   final currentUser = await getCurrentUser();
+  int id = currentUser?['id'] ?? currentUser?['id'] ?? 0;
 
-  final url = Uri.parse("$baseUrl/dates/responsible/$currentUser?['id']");
+  final url = Uri.parse("$baseUrl/dates/responsible/$id");
   final headers = {'Content-Type': 'application/json'};
 
   try {

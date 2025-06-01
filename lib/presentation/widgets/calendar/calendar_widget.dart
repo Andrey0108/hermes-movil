@@ -36,7 +36,7 @@ class _CalendarWidgetState extends State<CalendarWidget> {
 
   Future<void> _loadProgramming() async {
     try {
-      final fetchedProgramming = await getAllByResponsible(1);
+      final fetchedProgramming = await getAllByResponsible();
       setState(() {
         programming = fetchedProgramming;
       });
