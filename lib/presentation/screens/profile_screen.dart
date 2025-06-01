@@ -53,7 +53,6 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ),
               onPressed: () async {
-                // Aquí se llamaría al servicio de logout
                 final response = await logout();
                 if (response) {
                   ScaffoldMessenger.of(context).showSnackBar(
