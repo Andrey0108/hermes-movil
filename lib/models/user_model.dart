@@ -7,7 +7,7 @@ class UserModel {
   final String surName;
   final DateTime dateBirth;
   final String email;
-  final String password;
+  final String? password;
   final int idMunicipality;
   final String? address;
   final String phone;
@@ -16,6 +16,10 @@ class UserModel {
   final String? bloodType;
   final String? eps;
   final bool status;
+  final bool activate;
+  final String? activationToken;
+  final String? resetPasswordToken;
+  final DateTime? passwordUpdatedAt;
 
   UserModel({
     required this.id,
@@ -26,7 +30,7 @@ class UserModel {
     required this.surName,
     required this.dateBirth,
     required this.email,
-    required this.password,
+    this.password,
     required this.idMunicipality,
     this.address,
     required this.phone,
@@ -35,6 +39,10 @@ class UserModel {
     this.bloodType,
     this.eps,
     required this.status,
+    required this.activate,
+    this.activationToken,
+    this.resetPasswordToken,
+    this.passwordUpdatedAt,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
@@ -47,7 +55,7 @@ class UserModel {
       surName: json['surName'] as String,
       dateBirth: DateTime.parse(json['dateBirth'] as String),
       email: json['email'] as String,
-      password: json['password'] as String,
+      password: json['password'] as String?,
       idMunicipality: json['idMunicipality'] as int,
       address: json['address'] as String?,
       phone: json['phone'] as String,
@@ -56,6 +64,12 @@ class UserModel {
       bloodType: json['bloodType'] as String?,
       eps: json['eps'] as String?,
       status: json['status'] as bool,
+      activate: json['activate'] as bool,
+      activationToken: json['activationToken'] as String?,
+      resetPasswordToken: json['resetPasswordToken'] as String?,
+      passwordUpdatedAt: json['passwordUpdatedAt'] != null
+          ? DateTime.parse(json['passwordUpdatedAt'] as String)
+          : null,
     );
   }
 }

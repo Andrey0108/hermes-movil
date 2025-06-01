@@ -18,7 +18,29 @@ Future<UserModel> getProfile() async {
   final response = await httpClient.get(Uri.parse('$baseUrl/users/$userId'));
 
   if (response.statusCode == 200) {
-    return UserModel.fromJson(json.decode(response.body));
+    final responseData = json.decode(response.body);
+    return UserModel(
+      id: responseData['id'],
+      idRole: responseData['idRole'],
+      typeDocument: responseData['typeDocument'],
+      document: responseData['document'],
+      name: responseData['name'],
+      surName: responseData['surName'],
+      dateBirth: DateTime.parse(responseData['dateBirth']),
+      email: responseData['email'],
+      idMunicipality: responseData['idMunicipality'],
+      address: responseData['address'],
+      phone: responseData['phone'],
+      emergency: responseData['emergency'],
+      sex: responseData['sex'],
+      bloodType: responseData['bloodType'],
+      eps: responseData['eps'],
+      status: responseData['status'],
+      activate: responseData['activate'],
+      activationToken: responseData['activationToken'],
+      resetPasswordToken: responseData['resetPasswordToken'],
+      passwordUpdatedAt: DateTime.parse(responseData['passwordUpdatedAt']),
+    );
   } else {
     throw Exception('Error al obtener el usuario');
   }
