@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:hermes/presentation/widgets/appbar_widget.dart';
 import 'package:hermes/presentation/widgets/menu/menu_widget.dart';
@@ -6,8 +7,40 @@ import 'package:hermes/services/index.dart';
 
 import '../values.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  Map<String, dynamic>? currentUser;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadProfile();
+  }
+
+  Future<void> _loadProfile() async {
+    try {
+      final userProfile = await getProfile();
+      setState(() {
+        currentUser = {
+          'name': userProfile.name,
+          'surName': userProfile.surName,
+          'email': userProfile.email,
+          'phone': userProfile.phone,
+          'address': userProfile.address,
+        };
+      });
+    } catch (e) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Error al cargar el perfil: $e')));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,16 +61,28 @@ class ProfileScreen extends StatelessWidget {
               ),
               child: Icon(Icons.person, size: iconSize, color: Colors.white),
             ),
-            const Column(
+            Column(
               children: [
-                DataWidget(hintText: "Nombres", dataText: "Alan Andrey"),
-                DataWidget(hintText: "Apellidos", dataText: "Sanchez Caro"),
+                DataWidget(
+                  hintText: "Nombres",
+                  dataText: currentUser?['name'] ?? "N/A",
+                ),
+                DataWidget(
+                  hintText: "Apellidos",
+                  dataText: currentUser?['surName'] ?? "N/A",
+                ),
                 DataWidget(
                   hintText: "Correo",
-                  dataText: "alansanchez123@gmail.com",
+                  dataText: currentUser?['email'] ?? "N/A",
                 ),
-                DataWidget(hintText: "Teléfono", dataText: "3011111111"),
-                DataWidget(hintText: "Dirección", dataText: "Cl 9 # 9-9"),
+                DataWidget(
+                  hintText: "Teléfono",
+                  dataText: currentUser?['phone'] ?? "N/A",
+                ),
+                DataWidget(
+                  hintText: "Dirección",
+                  dataText: currentUser?['address'] ?? "N/A",
+                ),
               ],
             ),
             ElevatedButton(

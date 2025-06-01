@@ -48,10 +48,37 @@ Future<String?> _getAccessToken() async {
   return prefs.getString('jwt_token');
 }
 
-void _updateCurrentUser(String token) {
+Future<void> _updateCurrentUser(String token) async {
   final decodedToken = _getDecodedAccessToken(token);
   if (decodedToken != null) {
-    _currentUserController.add(decodedToken);
+    final requiredFields = ['name', 'surName', 'email', 'phone', 'address'];
+    final missingFields = requiredFields
+        .where((field) => !decodedToken.containsKey(field))
+        .toList();
+
+    if (missingFields.isEmpty) {
+      _currentUserController.add(decodedToken);
+    } else {
+      throw Exception(
+        'Decoded token is missing required fields: $missingFields',
+      );
+    }
+  } else {
+    throw Exception('Failed to decode token');
+  }
+}
+
+Future<Map<String, dynamic>?> getCurrentUser() async {
+  final token = await _getAccessToken();
+  if (token == null || await isTokenExpired(token)) {
+    throw Exception('Usuario no autenticado o token expirado');
+  }
+
+  final decodedToken = _getDecodedAccessToken(token);
+  if (decodedToken != null) {
+    return decodedToken;
+  } else {
+    throw Exception('Error al obtener el usuario');
   }
 }
 
@@ -61,7 +88,10 @@ Map<String, dynamic>? _getDecodedAccessToken(String token) {
     if (parts.length != 3) {
       throw Exception('Invalid token format');
     }
-    final payloadBase64 = parts[1];
+    String payloadBase64 = parts[1];
+    while (payloadBase64.length % 4 != 0) {
+      payloadBase64 += '=';
+    }
     final payload = utf8.decode(base64Url.decode(payloadBase64));
     return jsonDecode(payload);
   } catch (e) {

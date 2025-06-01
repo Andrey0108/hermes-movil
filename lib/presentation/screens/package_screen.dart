@@ -42,7 +42,7 @@ class PackageScreen extends StatelessWidget {
             SizedBox(
               height: 378,
               child: FutureBuilder<List<UserModel>>(
-                future: Future.value([UserModel()]),
+                future: Future.value([]),
                 builder: (context, snapshot) {
                   if (snapshot.hasError) print(snapshot.error);
                   return snapshot.hasData
