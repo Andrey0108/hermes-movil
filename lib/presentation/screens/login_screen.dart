@@ -49,18 +49,24 @@ class LoginScreen extends StatelessWidget {
               ),
             ),
             onPressed: () async {
-              try {
-                final response = await login(
-                  _emailController.text,
-                  _passwordController.text,
-                );
+              final email = _emailController.text.trim();
+              final password = _passwordController.text.trim();
 
-                if (response.statusCode == 201) {
-                  print('Inicio de sesión exitoso: ${response.body}');
+              if (email.isEmpty || password.isEmpty) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text('Por favor, complete todos los campos'),
+                  ),
+                );
+                return;
+              }
+
+              try {
+                final response = await login(email, password);
+
+                if (response.statusCode == 200 || response.statusCode == 201) {
                   Navigator.pushReplacementNamed(context, "/home");
                 } else {
-                  print('Error de inicio de sesión: ${response.statusCode}');
-                  print('Mensaje de error: ${response.body}');
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       content: Text(
@@ -70,13 +76,11 @@ class LoginScreen extends StatelessWidget {
                   );
                 }
               } catch (e) {
-                print('Error durante el inicio de sesión: $e');
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('Error al conectar con el servidor.')),
+                  SnackBar(content: Text('Error al iniciar sesión: $e')),
                 );
               }
             },
-
             child: const Text("Ingresar"),
           ),
         ],
