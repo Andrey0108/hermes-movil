@@ -1,5 +1,6 @@
 import 'package:hermes/interceptors/index.dart';
 import 'package:hermes/models/index.dart';
+import 'package:hermes/services/index.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import '../config.dart';
@@ -7,7 +8,9 @@ import '../config.dart';
 final httpClient = HttpInterceptor(http.Client());
 
 Future<List<ProgrammingModel>> getAllByResponsible(int idResponsible) async {
-  final url = Uri.parse('$baseUrl/dates/responsible/$idResponsible');
+  final currentUser = await getCurrentUser();
+
+  final url = Uri.parse("$baseUrl/dates/responsible/$currentUser?['id']");
   final headers = {'Content-Type': 'application/json'};
 
   try {

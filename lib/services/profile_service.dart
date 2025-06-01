@@ -9,13 +9,10 @@ final httpClient = HttpInterceptor(http.Client());
 
 Future<UserModel> getProfile() async {
   final currentUser = await getCurrentUser();
-  final userId = currentUser?['id'];
 
-  if (userId == null) {
-    throw Exception('Usuario no autenticado');
-  }
-
-  final response = await httpClient.get(Uri.parse('$baseUrl/users/$userId'));
+  final response = await httpClient.get(
+    Uri.parse("$baseUrl/users/$currentUser?['id']"),
+  );
 
   if (response.statusCode == 200) {
     final responseData = json.decode(response.body);
