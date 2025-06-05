@@ -89,34 +89,35 @@ class _CalendarWidgetState extends State<CalendarWidget> {
           (pkg) => pkg.id == program.idPackage,
           orElse: () => PackageModel(
             id: 0,
-            name: 'Unknown Package',
+            name: 'Paquete desconocido',
             idActivity: 0,
             idMunicipality: 0,
             level: 0,
             price: 0,
             reserve: 0,
-            description: 'No description available',
-            image: 'default_image.png', // Provide a default image
+            description: 'No hay descripción disponible',
+            image: 'default_image.png', // Imagen por defecto
             detailPackagesServices: [],
             status: false,
           ),
         );
+
         return Appointment(
           startTime: program.start,
           endTime: program.end,
+          isAllDay: true,
           subject: package.name,
+          notes: package.description,
           color: program.status
-              ? package.status
-                    ? Colors.green
-                    : Colors.red
+              ? (package.status ? Colors.green : Colors.red)
               : Colors.grey,
         );
       } catch (e) {
-        print('Error mapping program to appointment: $e');
         return Appointment(
-          startTime: program.start,
-          endTime: program.end,
-          subject: 'Unknown Package',
+          startTime: DateTime.now(),
+          endTime: DateTime.now(),
+          isAllDay: true,
+          subject: 'Error al cargar paquete',
           color: Colors.grey,
         );
       }
