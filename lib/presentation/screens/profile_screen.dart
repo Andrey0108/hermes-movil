@@ -32,7 +32,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
           'surName': userProfile.surName,
           'email': userProfile.email,
           'phone': userProfile.phone,
-          'address': userProfile.address,
         };
       });
     } catch (e) {
@@ -78,10 +77,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 DataWidget(
                   hintText: "Teléfono",
                   dataText: currentUser?['phone'] ?? "N/A",
-                ),
-                DataWidget(
-                  hintText: "Dirección",
-                  dataText: currentUser?['address'] ?? "N/A",
                 ),
               ],
             ),
