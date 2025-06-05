@@ -1,4 +1,3 @@
-// ignore_for_file: library_private_types_in_public_api, avoid_print
 import 'package:flutter/material.dart';
 import 'package:hermes/models/index.dart';
 import 'package:hermes/presentation/values.dart';
@@ -15,12 +14,13 @@ class CalendarWidget extends StatefulWidget {
 class _CalendarWidgetState extends State<CalendarWidget> {
   List<PackageModel> packages = [];
   List<ProgrammingModel> programming = [];
+  UserModel? currentUser; // Variable para almacenar el usuario actual
 
   @override
   void initState() {
     super.initState();
     _loadPackages();
-    _loadProgramming();
+    _loadCurrentUser(); // Cargar usuario actual
   }
 
   Future<void> _loadPackages() async {
@@ -28,20 +28,37 @@ class _CalendarWidgetState extends State<CalendarWidget> {
       final fetchedPackages = await getAllPackages();
       setState(() {
         packages = fetchedPackages;
+        print(fetchedPackages);
       });
     } catch (e) {
       print('Error loading packages: $e');
     }
   }
 
-  Future<void> _loadProgramming() async {
+  Future<void> _loadCurrentUser() async {
     try {
-      final fetchedProgramming = await getAllByResponsible();
+      final userMap = await getCurrentUser(); // Obtener usuario actual
+      final user = UserModel.fromJson(userMap as Map<String, dynamic>);
+      setState(() {
+        currentUser = user;
+      });
+      if (user.idRole == 1 || user.idRole == 2) {
+        _loadProgrammingByResponsible(user.id);
+      }
+    } catch (e) {
+      print('Error loading current user: $e');
+    }
+  }
+
+  Future<void> _loadProgrammingByResponsible(int userId) async {
+    try {
+      final fetchedProgramming = await getAllByResponsible(userId);
       setState(() {
         programming = fetchedProgramming;
+        print(fetchedProgramming);
       });
     } catch (e) {
-      print('Error loading programming: $e');
+      print('Error loading programming by responsible: $e');
     }
   }
 
@@ -56,9 +73,10 @@ class _CalendarWidgetState extends State<CalendarWidget> {
         view: CalendarView.week,
         firstDayOfWeek: 7,
         dataSource: PackageDataSource(_convertProgrammingToAppointments()),
-        onTap: (calendarTapDetails) => {
-          if (calendarTapDetails.targetElement == CalendarElement.appointment)
-            Navigator.pushNamed(context, "/package"),
+        onTap: (calendarTapDetails) {
+          if (calendarTapDetails.targetElement == CalendarElement.appointment) {
+            Navigator.pushNamed(context, "/package");
+          }
         },
       ),
     );
@@ -66,16 +84,42 @@ class _CalendarWidgetState extends State<CalendarWidget> {
 
   List<Appointment> _convertProgrammingToAppointments() {
     return programming.map((program) {
-      return Appointment(
-        startTime: program.start,
-        endTime: program.end,
-        subject: packages.firstWhere((pkg) => pkg.id == program.idPackage).name,
-        color: program.status
-            ? packages.firstWhere((pkg) => pkg.id == program.idPackage).status
-                  ? Colors.green
-                  : Colors.red
-            : Colors.grey,
-      );
+      try {
+        final package = packages.firstWhere(
+          (pkg) => pkg.id == program.idPackage,
+          orElse: () => PackageModel(
+            id: 0,
+            name: 'Unknown Package',
+            idActivity: 0,
+            idMunicipality: 0,
+            level: 0,
+            price: 0,
+            reserve: 0,
+            description: 'No description available',
+            image: 'default_image.png', // Provide a default image
+            detailPackagesServices: [],
+            status: false,
+          ),
+        );
+        return Appointment(
+          startTime: program.start,
+          endTime: program.end,
+          subject: package.name,
+          color: program.status
+              ? package.status
+                    ? Colors.green
+                    : Colors.red
+              : Colors.grey,
+        );
+      } catch (e) {
+        print('Error mapping program to appointment: $e');
+        return Appointment(
+          startTime: program.start,
+          endTime: program.end,
+          subject: 'Unknown Package',
+          color: Colors.grey,
+        );
+      }
     }).toList();
   }
 }

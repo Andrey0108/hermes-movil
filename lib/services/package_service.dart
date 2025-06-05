@@ -12,7 +12,8 @@ Future<List<PackageModel>> getAllPackages() async {
 
   try {
     final response = await httpClient.get(url, headers: headers);
-    if (response.statusCode == 200) {
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      print('Response from getAllPackages: ${response.body}');
       List<dynamic> data = jsonDecode(response.body);
       List<PackageModel> packages = data
           .map((item) => PackageModel.fromJson(item))

@@ -1,23 +1,26 @@
 class ProgrammingModel {
-  final int id;
-  final int idPackage;
-  final int amount;
-  final DateTime start;
-  final DateTime end;
-  final DateTime startRegistration;
-  final DateTime endRegistration;
-  final bool status;
+  int id;
+  int idPackage;
+  int amount;
+  DateTime start;
+  DateTime end;
+  DateTime startRegistration;
+  DateTime endRegistration;
+  bool status;
 
   ProgrammingModel({
-    required this.id,
-    required this.idPackage,
-    required this.amount,
-    required this.start,
-    required this.end,
-    required this.startRegistration,
-    required this.endRegistration,
-    required this.status,
-  });
+    this.id = 0,
+    this.idPackage = 0,
+    this.amount = 0,
+    DateTime? start,
+    DateTime? end,
+    DateTime? startRegistration,
+    DateTime? endRegistration,
+    this.status = true,
+  }) : start = start ?? DateTime.now(),
+       end = end ?? DateTime.now(),
+       startRegistration = startRegistration ?? DateTime.now(),
+       endRegistration = endRegistration ?? DateTime.now();
 
   factory ProgrammingModel.fromJson(Map<String, dynamic> json) {
     return ProgrammingModel(

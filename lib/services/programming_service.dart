@@ -7,7 +7,7 @@ import '../config.dart';
 
 final httpClient = HttpInterceptor(http.Client());
 
-Future<List<ProgrammingModel>> getAllByResponsible() async {
+Future<List<ProgrammingModel>> getAllByResponsible([int? userId]) async {
   final currentUser = await getCurrentUser();
   int id = currentUser?['id'] ?? currentUser?['id'] ?? 0;
 
@@ -16,7 +16,8 @@ Future<List<ProgrammingModel>> getAllByResponsible() async {
 
   try {
     final response = await httpClient.get(url, headers: headers);
-    if (response.statusCode == 200) {
+    if (response.statusCode == 200 || response.statusCode == 201) {
+      print('Response from getAllByResponsible: ${response.body}');
       List<dynamic> data = jsonDecode(response.body);
       List<ProgrammingModel> programmingList = data
           .map((item) => ProgrammingModel.fromJson(item))
