@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hermes/models/index.dart';
 import 'presentation/screens/index.dart';
 
 void main() {
@@ -11,7 +12,14 @@ class MyApp extends StatelessWidget {
   final _routes = {
     "/": (context) => LoginScreen(),
     "/home": (context) => const HomeScreen(),
-    "/package": (context) => PackageScreen(),
+    "/package": (context) {
+      final args =
+          ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+      return PackageScreen(
+        package: args['package'] as PackageModel,
+        idDate: args['idDate'] as int,
+      );
+    },
     "/profile": (context) => const ProfileScreen(),
   };
 

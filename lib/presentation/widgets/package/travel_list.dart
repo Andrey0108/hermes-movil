@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:hermes/models/user_model.dart';
-import 'package:hermes/presentation/widgets/package/travel_item.dart';
 
-class TravelList extends StatelessWidget {
-  const TravelList({super.key, required this.items});
+class TravelList<T> extends StatelessWidget {
+  const TravelList({super.key, required this.items, required this.itemBuilder});
 
-  final List<UserModel> items;
+  final List<T> items;
+  final Widget Function(BuildContext, T) itemBuilder;
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
       itemCount: items.length,
       itemBuilder: (context, index) {
-        return TravelItem(user: items[index]);
+        return itemBuilder(context, items[index]);
       },
     );
   }

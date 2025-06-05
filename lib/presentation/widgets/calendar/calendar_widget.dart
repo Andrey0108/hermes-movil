@@ -75,7 +75,36 @@ class _CalendarWidgetState extends State<CalendarWidget> {
         dataSource: PackageDataSource(_convertProgrammingToAppointments()),
         onTap: (calendarTapDetails) {
           if (calendarTapDetails.targetElement == CalendarElement.appointment) {
-            Navigator.pushNamed(context, "/package");
+            final appointment =
+                calendarTapDetails.appointments!.first as Appointment;
+            final package = packages.firstWhere(
+              (pkg) =>
+                  pkg.id ==
+                  programming
+                      .firstWhere((prog) => prog.id == appointment.id)
+                      .idPackage,
+              orElse: () => PackageModel(
+                id: 0,
+                name: 'Paquete desconocido',
+                idActivity: 0,
+                idMunicipality: 0,
+                level: 0,
+                price: 0,
+                reserve: 0,
+                description: 'No hay descripción disponible',
+                image: 'default_image.png',
+                detailPackagesServices: [],
+                status: false,
+              ),
+            );
+            Navigator.pushNamed(
+              context,
+              "/package",
+              arguments: {
+                'package': package,
+                'idDate': appointment.id,
+              }, // Pass package and idDate
+            );
           }
         },
       ),
@@ -103,6 +132,7 @@ class _CalendarWidgetState extends State<CalendarWidget> {
         );
 
         return Appointment(
+          id: program.id,
           startTime: program.start,
           endTime: program.end,
           isAllDay: true,

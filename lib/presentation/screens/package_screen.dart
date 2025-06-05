@@ -2,61 +2,54 @@
 
 import 'package:flutter/material.dart';
 import 'package:hermes/models/index.dart';
-import 'package:hermes/presentation/widgets/appbar_widget.dart';
-import 'package:hermes/presentation/widgets/menu/menu_widget.dart';
-import 'package:hermes/presentation/widgets/package/package_item.dart';
+import 'package:hermes/services/reservation_service.dart';
 import 'package:hermes/presentation/widgets/package/travel_list.dart';
-import '../values.dart';
 
-class PackageScreen extends StatelessWidget {
-  const PackageScreen({super.key});
+class PackageScreen extends StatefulWidget {
+  final PackageModel package;
+  final int idDate;
+
+  const PackageScreen({super.key, required this.package, required this.idDate});
+
+  @override
+  State<PackageScreen> createState() => _PackageScreenState();
+}
+
+class _PackageScreenState extends State<PackageScreen> {
+  late Future<List<UserModel>> travelersFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    travelersFuture = getTravelersByProgramming(widget.idDate); // Use idDate
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const AppBarWidget(title: "Paquete"),
-      body: Container(
-        padding: EdgeInsets.symmetric(
-          horizontal: horizontalValue,
-          vertical: verticalValue,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            PackageItem(
-              package: PackageModel(
-                id: 1,
-                name: "Paquete de Aventura",
-                idActivity: 1,
-                idMunicipality: 1,
-                level: 2,
-                price: 100,
-                reserve: 10,
-                description: "Un paquete lleno de aventuras emocionantes.",
-                image: "assets/images/package.jpg",
-                status: true,
-                detailPackagesServices: [],
-              ),
-            ),
-            SizedBox(
-              height: 378,
-              child: FutureBuilder<List<UserModel>>(
-                future: Future.value([]),
-                builder: (context, snapshot) {
-                  if (snapshot.hasError) print(snapshot.error);
-                  return snapshot.hasData
-                      ? TravelList(items: snapshot.data ?? [])
-                      : CircularProgressIndicator(
-                          color: Colors.blue[colorValue],
-                        );
-                },
-              ),
-            ),
-          ],
-        ),
+      appBar: AppBar(title: Text(widget.package.name)),
+      body: FutureBuilder<List<UserModel>>(
+        future: travelersFuture,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return const Center(child: Text('No travelers found.'));
+          } else {
+            return TravelList(
+              items: snapshot.data!,
+              itemBuilder: (context, traveler) {
+                return ListTile(
+                  title: Text(traveler.name),
+                  subtitle: Text(traveler.email),
+                );
+              },
+            );
+          }
+        },
       ),
-      bottomNavigationBar: const MenuWidget(currentIndex: 0),
     );
   }
 }
