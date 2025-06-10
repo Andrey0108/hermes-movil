@@ -14,13 +14,13 @@ class CalendarWidget extends StatefulWidget {
 class _CalendarWidgetState extends State<CalendarWidget> {
   List<PackageModel> packages = [];
   List<ProgrammingModel> programming = [];
-  UserModel? currentUser; // Variable para almacenar el usuario actual
+  UserModel? currentUser;
 
   @override
   void initState() {
     super.initState();
     _loadPackages();
-    _loadCurrentUser(); // Cargar usuario actual
+    _loadCurrentUser();
   }
 
   Future<void> _loadPackages() async {
@@ -29,17 +29,20 @@ class _CalendarWidgetState extends State<CalendarWidget> {
       setState(() {
         packages = fetchedPackages;
       });
-    } catch (e) {}
+    } catch (e) {
+      throw Exception('Error al cargar los paquetes: $e');
+    }
   }
 
   Future<void> _loadCurrentUser() async {
     try {
-      final userMap = await getCurrentUser(); // Obtener usuario actual
+      final userMap = await getCurrentUser();
       final user = UserModel.fromJson(userMap as Map<String, dynamic>);
       setState(() {
         currentUser = user;
       });
-      if (user.idRole == 1 || user.idRole == 2) {
+      if (currentUser != null &&
+          (currentUser!.idRole == 1 || currentUser!.idRole == 2)) {
         _loadProgrammingByResponsible(user.id);
       }
     } catch (e) {
@@ -79,19 +82,6 @@ class _CalendarWidgetState extends State<CalendarWidget> {
                   programming
                       .firstWhere((prog) => prog.id == appointment.id)
                       .idPackage,
-              orElse: () => PackageModel(
-                id: 0,
-                name: 'Paquete desconocido',
-                idActivity: 0,
-                idMunicipality: 0,
-                level: 0,
-                price: 0,
-                reserve: 0,
-                description: 'No hay descripción disponible',
-                image: 'default_image.png',
-                detailPackagesServices: [],
-                status: false,
-              ),
             );
             Navigator.pushNamed(
               context,
@@ -109,19 +99,6 @@ class _CalendarWidgetState extends State<CalendarWidget> {
       try {
         final package = packages.firstWhere(
           (pkg) => pkg.id == program.idPackage,
-          orElse: () => PackageModel(
-            id: 0,
-            name: 'Paquete desconocido',
-            idActivity: 0,
-            idMunicipality: 0,
-            level: 0,
-            price: 0,
-            reserve: 0,
-            description: 'No hay descripción disponible',
-            image: 'default_image.png', // Imagen por defecto
-            detailPackagesServices: [],
-            status: false,
-          ),
         );
 
         return Appointment(
@@ -136,15 +113,7 @@ class _CalendarWidgetState extends State<CalendarWidget> {
               : Colors.grey,
         );
       } catch (e) {
-        return Appointment(
-          id: 0,
-          startTime: DateTime.now(),
-          endTime: DateTime.now().add(Duration(hours: 1)),
-          isAllDay: true,
-          subject: 'Error',
-          notes: 'No se pudo cargar el paquete',
-          color: Colors.red,
-        );
+        throw Exception('Error: $e');
       }
     }).toList();
   }
