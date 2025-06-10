@@ -14,7 +14,6 @@ Future<UserModel> getProfile() async {
   final response = await httpClient.get(Uri.parse("$baseUrl/users/$id"));
 
   if (response.statusCode == 200 || response.statusCode == 201) {
-    print('Response from getProfile: ${response.body}');
     final responseData = json.decode(response.body);
     return UserModel(
       id: responseData['id'],

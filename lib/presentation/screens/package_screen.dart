@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_print
-
 import 'package:flutter/material.dart';
 import 'package:hermes/models/index.dart';
 import 'package:hermes/services/reservation_service.dart';
@@ -21,7 +19,7 @@ class _PackageScreenState extends State<PackageScreen> {
   @override
   void initState() {
     super.initState();
-    travelersFuture = getTravelersByProgramming(widget.idDate); // Use idDate
+    travelersFuture = getTravelersByProgramming(widget.idDate);
   }
 
   @override

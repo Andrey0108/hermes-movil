@@ -28,11 +28,8 @@ class _CalendarWidgetState extends State<CalendarWidget> {
       final fetchedPackages = await getAllPackages();
       setState(() {
         packages = fetchedPackages;
-        print(fetchedPackages);
       });
-    } catch (e) {
-      print('Error loading packages: $e');
-    }
+    } catch (e) {}
   }
 
   Future<void> _loadCurrentUser() async {
@@ -46,7 +43,7 @@ class _CalendarWidgetState extends State<CalendarWidget> {
         _loadProgrammingByResponsible(user.id);
       }
     } catch (e) {
-      print('Error loading current user: $e');
+      throw Exception('Error al cargar el usuario actual: $e');
     }
   }
 
@@ -55,10 +52,9 @@ class _CalendarWidgetState extends State<CalendarWidget> {
       final fetchedProgramming = await getAllByResponsible(userId);
       setState(() {
         programming = fetchedProgramming;
-        print(fetchedProgramming);
       });
     } catch (e) {
-      print('Error loading programming by responsible: $e');
+      throw Exception('Error al cargar la programación: $e');
     }
   }
 
@@ -100,10 +96,7 @@ class _CalendarWidgetState extends State<CalendarWidget> {
             Navigator.pushNamed(
               context,
               "/package",
-              arguments: {
-                'package': package,
-                'idDate': appointment.id,
-              }, // Pass package and idDate
+              arguments: {'package': package, 'idDate': appointment.id},
             );
           }
         },
@@ -144,11 +137,13 @@ class _CalendarWidgetState extends State<CalendarWidget> {
         );
       } catch (e) {
         return Appointment(
+          id: 0,
           startTime: DateTime.now(),
-          endTime: DateTime.now(),
+          endTime: DateTime.now().add(Duration(hours: 1)),
           isAllDay: true,
-          subject: 'Error al cargar paquete',
-          color: Colors.grey,
+          subject: 'Error',
+          notes: 'No se pudo cargar el paquete',
+          color: Colors.red,
         );
       }
     }).toList();

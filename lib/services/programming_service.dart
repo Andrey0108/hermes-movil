@@ -17,7 +17,6 @@ Future<List<ProgrammingModel>> getAllByResponsible([int? userId]) async {
   try {
     final response = await httpClient.get(url, headers: headers);
     if (response.statusCode == 200 || response.statusCode == 201) {
-      print('Response from getAllByResponsible: ${response.body}');
       List<dynamic> data = jsonDecode(response.body);
       List<ProgrammingModel> programmingList = data
           .map((item) => ProgrammingModel.fromJson(item))
