@@ -13,6 +13,7 @@ class CalendarWidget extends StatefulWidget {
 
 class _CalendarWidgetState extends State<CalendarWidget> {
   List<PackageModel> packages = [];
+  List<ReservationModel> reservations = [];
   List<ProgrammingModel> programming = [];
   UserModel? currentUser;
 
@@ -20,6 +21,7 @@ class _CalendarWidgetState extends State<CalendarWidget> {
   void initState() {
     super.initState();
     _loadPackages();
+    _loadReservations();
     _loadCurrentUser();
   }
 
@@ -34,6 +36,17 @@ class _CalendarWidgetState extends State<CalendarWidget> {
     }
   }
 
+  Future<void> _loadReservations() async {
+    try {
+      final fetchedReservations = await getAllReservations();
+      setState(() {
+        reservations = fetchedReservations;
+      });
+    } catch (e) {
+      throw Exception('Error al cargar las reservaciones: $e');
+    }
+  }
+
   Future<void> _loadCurrentUser() async {
     try {
       final userMap = await getCurrentUser();
@@ -41,8 +54,7 @@ class _CalendarWidgetState extends State<CalendarWidget> {
       setState(() {
         currentUser = user;
       });
-      if (currentUser != null &&
-          (currentUser!.idRole == 1 || currentUser!.idRole == 2)) {
+      if (currentUser != null) {
         _loadProgrammingByResponsible(user.id);
       }
     } catch (e) {
