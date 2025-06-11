@@ -28,13 +28,20 @@ class ReservationModel {
 
   factory ReservationModel.fromJson(Map<String, dynamic> json) {
     return ReservationModel(
-      id: json['id'] as int? ?? 0,
-      idDate: json['idDate'] as int? ?? 0,
-      idUser: json['idUser'] as int? ?? 0,
-      price: (json['price'] as num?)?.toInt() ?? 0,
+      id: json['id'] is String
+          ? int.tryParse(json['id']) ?? 0
+          : json['id'] as int? ?? 0,
+      idDate: json['idDate'] is String
+          ? int.tryParse(json['idDate']) ?? 0
+          : json['idDate'] as int? ?? 0,
+      idUser: json['idUser'] is String
+          ? int.tryParse(json['idUser']) ?? 0
+          : json['idUser'] as int? ?? 0,
+      price: json['price'] is String
+          ? int.tryParse(json['price']) ?? 0
+          : (json['price'] as num?)?.toInt() ?? 0,
       status: ReservationStatus.values.firstWhere(
         (e) => e.toString() == 'ReservationStatus.${json['status']}',
-        orElse: () => ReservationStatus.N,
       ),
       detailReservationTravelers:
           (json['detailReservationTravelers'] as List<dynamic>?)

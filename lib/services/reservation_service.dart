@@ -21,7 +21,6 @@ Future<List<ReservationModel>> getAllReservations() async {
       List<ReservationModel> reservations = data
           .map((item) => ReservationModel.fromJson(item))
           .toList();
-      print(reservations);
       return reservations;
     } else {
       throw Exception('Failed to load reservations');

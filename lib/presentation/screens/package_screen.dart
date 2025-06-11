@@ -38,11 +38,9 @@ class _PackageScreenState extends State<PackageScreen> {
 
   Future<void> _loadReservations() async {
     try {
-      print(widget.idDate);
       final fetchedReservations = await getTravelers(widget.idDate);
       setState(() {
         reservationsFuture = fetchedReservations;
-        print(fetchedReservations);
       });
     } catch (e) {
       throw Exception('Error al cargar las reservas: $e');
@@ -62,11 +60,6 @@ class _PackageScreenState extends State<PackageScreen> {
         builder: (context, snapshot) {
           final travelers = snapshot.data!
               .expand((reservation) => reservation.detailReservationTravelers)
-              .map(
-                (traveler) => ReservationTravelerModel.fromJson(
-                  traveler as Map<String, dynamic>,
-                ),
-              )
               .toList();
 
           return TravelList<ReservationTravelerModel>(
