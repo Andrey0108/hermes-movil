@@ -21,6 +21,7 @@ Future<List<ReservationModel>> getAllReservations() async {
       List<ReservationModel> reservations = data
           .map((item) => ReservationModel.fromJson(item))
           .toList();
+      print(reservations);
       return reservations;
     } else {
       throw Exception('Failed to load reservations');
@@ -38,9 +39,6 @@ Future<List<ReservationModel>> getTravelers(int idDate) async {
     final response = await httpClient.get(url, headers: headers);
     if (response.statusCode == 200 || response.statusCode == 201) {
       List<dynamic> data = jsonDecode(response.body);
-      if (data.isEmpty) {
-        return [];
-      }
       List<ReservationModel> reservations = data
           .map((item) => ReservationModel.fromJson(item))
           .toList();
@@ -49,6 +47,6 @@ Future<List<ReservationModel>> getTravelers(int idDate) async {
       throw Exception('Failed to load travelers');
     }
   } catch (e) {
-    return [];
+    throw Exception('Error al cargar los viajeros: $e');
   }
 }

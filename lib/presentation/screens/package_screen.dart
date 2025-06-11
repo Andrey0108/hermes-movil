@@ -38,9 +38,11 @@ class _PackageScreenState extends State<PackageScreen> {
 
   Future<void> _loadReservations() async {
     try {
+      print(widget.idDate);
       final fetchedReservations = await getTravelers(widget.idDate);
       setState(() {
         reservationsFuture = fetchedReservations;
+        print(fetchedReservations);
       });
     } catch (e) {
       throw Exception('Error al cargar las reservas: $e');
@@ -58,14 +60,6 @@ class _PackageScreenState extends State<PackageScreen> {
       body: FutureBuilder<List<ReservationModel>>(
         future: Future.value(reservationsFuture),
         builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
-          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return Center(child: Text('No reservations found.'));
-          }
-
           final travelers = snapshot.data!
               .expand((reservation) => reservation.detailReservationTravelers)
               .map(
