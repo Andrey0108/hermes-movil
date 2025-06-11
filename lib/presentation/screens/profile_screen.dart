@@ -45,71 +45,116 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const AppBarWidget(title: "Perfil"),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Container(
-              padding: EdgeInsets.symmetric(
-                horizontal: horizontalValue,
-                vertical: verticalValue,
-              ),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.grey[400],
-              ),
-              child: Icon(Icons.person, size: iconSize, color: Colors.white),
-            ),
-            Column(
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [Colors.lightBlue.shade300, Colors.lightBlue.shade100],
+          ),
+        ),
+        child: SafeArea(
+          child: SingleChildScrollView(
+            padding: EdgeInsets.all(horizontalValue),
+            child: Column(
               children: [
-                DataWidget(
-                  hintText: "Nombres",
-                  dataText: currentUser?['name'] ?? "N/A",
+                Container(
+                  width: double.infinity,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: horizontalValue,
+                    vertical: verticalValue,
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.lightBlue[400],
+                    borderRadius: BorderRadius.circular(borderRadiusValue),
+                  ),
+                  child: Column(
+                    children: [
+                      Container(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: horizontalValue,
+                          vertical: verticalValue,
+                        ),
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.white,
+                        ),
+                        child: Icon(
+                          Icons.person,
+                          size: iconSize,
+                          color: Colors.lightBlue[400],
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-                DataWidget(
-                  hintText: "Apellidos",
-                  dataText: currentUser?['surName'] ?? "N/A",
+                SizedBox(height: verticalValue),
+                Card(
+                  elevation: 10,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(borderRadiusValue),
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.all(horizontalValue),
+                    child: Column(
+                      children: [
+                        DataWidget(
+                          hintText: "Nombres",
+                          dataText: currentUser?['name'] ?? "N/A",
+                        ),
+                        DataWidget(
+                          hintText: "Apellidos",
+                          dataText: currentUser?['surName'] ?? "N/A",
+                        ),
+                        DataWidget(
+                          hintText: "Correo",
+                          dataText: currentUser?['email'] ?? "N/A",
+                        ),
+                        DataWidget(
+                          hintText: "Teléfono",
+                          dataText: currentUser?['phone'] ?? "N/A",
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
-                DataWidget(
-                  hintText: "Correo",
-                  dataText: currentUser?['email'] ?? "N/A",
-                ),
-                DataWidget(
-                  hintText: "Teléfono",
-                  dataText: currentUser?['phone'] ?? "N/A",
+                SizedBox(height: verticalValue),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.red[700],
+                      foregroundColor: Colors.white,
+                      padding: EdgeInsets.symmetric(
+                        horizontal: horizontalValue,
+                        vertical: verticalValue,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(borderRadiusValue),
+                      ),
+                      elevation: 5,
+                    ),
+                    onPressed: () async {
+                      final response = await logout();
+                      if (response) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Sesión cerrada correctamente'),
+                          ),
+                        );
+                        Navigator.pushReplacementNamed(context, "/");
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text('Error al cerrar sesión')),
+                        );
+                      }
+                    },
+                    child: const Text("Cerrar sesión"),
+                  ),
                 ),
               ],
             ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.red[700],
-                foregroundColor: Colors.white,
-                padding: EdgeInsets.symmetric(
-                  horizontal: horizontalValue,
-                  vertical: verticalValue,
-                ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(borderRadiusValue),
-                ),
-              ),
-              onPressed: () async {
-                final response = await logout();
-                if (response) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Sesión cerrada correctamente'),
-                    ),
-                  );
-                  Navigator.pushReplacementNamed(context, "/");
-                } else {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('Error al cerrar sesión')),
-                  );
-                }
-              },
-              child: const Text("Cerrar sesión"),
-            ),
-          ],
+          ),
         ),
       ),
       bottomNavigationBar: const MenuWidget(currentIndex: 1),
